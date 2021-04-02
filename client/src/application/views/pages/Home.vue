@@ -1,5 +1,6 @@
 <template>
-  <div>Accueil</div>
+  <h1>Accueil</h1>
+  <p>Accès autorisé à tous les visiteurs</p>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 describe('UserAuthForm', () => {
-  test('visit the login page', () => {
+  it('visit the login page', () => {
     cy.visit('/login');
   });
 });

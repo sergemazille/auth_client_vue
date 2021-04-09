@@ -4,6 +4,8 @@ import router from '@/infrastructure/VueRouter';
 
 const app = createApp(App);
 
+app.provide('isAuthenticated', true);
+
 app.use(router);
 
 app.mount('#app');

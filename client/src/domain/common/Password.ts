@@ -1,11 +1,17 @@
 export class Password {
+  static readonly MIN_LENGTH = 4;
+
+  value: string;
+
   constructor(password: string) {
-    if (!this.isValid(password)) {
+    if (!Password.isValid(password)) {
       throw new Error('Password is not valid');
     }
+
+    this.value = password;
   }
 
-  private isValid(password: string): boolean {
-    return password.length > 3;
+  static isValid(password: string): boolean {
+    return password.length >= Password.MIN_LENGTH;
   }
 }

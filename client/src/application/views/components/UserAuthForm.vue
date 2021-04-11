@@ -8,6 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Email } from '@/domain/common/Email';
+import { Password } from '@/domain/common/Password';
 
 export default defineComponent({
   data() {
@@ -19,11 +21,21 @@ export default defineComponent({
 
   computed: {
     canSubmitForm(): boolean {
-      return !!this.email && !!this.password;
+      const { isValidEmail, isValidPassword, email, password } = this;
+
+      return isValidEmail(email) && isValidPassword(password);
     },
   },
 
   methods: {
+    isValidEmail(email: string): boolean {
+      return Email.isValid(email);
+    },
+
+    isValidPassword(password: string): boolean {
+      return password.length >= Password.MIN_LENGTH;
+    },
+
     handleFormSubmission() {
       if (!this.canSubmitForm) return;
 

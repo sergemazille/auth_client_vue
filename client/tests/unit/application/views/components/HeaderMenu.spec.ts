@@ -1,26 +1,36 @@
 import HeaderMenu from '@/application/views/components/HeaderMenu.vue';
 import { shallowMount } from '@vue/test-utils';
+import router from '@/infrastructure/VueRouter';
+import { AppRouterService } from '@/application/services/AppRouterService';
 
-const createWrapper = (opts?: Record<string, unknown>) => {
+let authService: any;
+const routerService: any = new AppRouterService(router)
+
+const createAuthService = (opts?: Record<string, any>) => {
+  return {
+    isAuthenticated: false,
+
+    ...opts,
+  };
+};
+
+const createWrapper = () => {
   return shallowMount(HeaderMenu, {
     global: {
       provide: {
-        authService: {
-          isAuthenticated: false,
-        },
+        authService,
+        routerService,
       },
 
       stubs: ['router-link'],
-
-      ...opts,
     },
   });
 };
 
 describe('HeaderMenu', () => {
   it('should display login and register links if user is not authenticated', () => {
-    const userIsNotAuthenticated = { provide: { authService: { isAuthenticated: false } } };
-    const wrapper = createWrapper(userIsNotAuthenticated);
+    authService = createAuthService({ isAuthenticated: false });
+    const wrapper = createWrapper();
 
     const loginLink = wrapper.find('[data-selector="login-link"]');
     const registerLink = wrapper.find('[data-selector="register-link"]');
@@ -30,8 +40,8 @@ describe('HeaderMenu', () => {
   });
 
   it('should not display logout links if user is not authenticated', () => {
-    const userIsNotAuthenticated = { provide: { authService: { isAuthenticated: false } } };
-    const wrapper = createWrapper(userIsNotAuthenticated);
+    authService = createAuthService({ isAuthenticated: false });
+    const wrapper = createWrapper();
 
     const logoutLink = wrapper.find('[data-selector="logout-action"]');
 
@@ -39,8 +49,8 @@ describe('HeaderMenu', () => {
   });
 
   it('should not display login and register links if user is authenticated', () => {
-    const userIsAuthenticated = { provide: { authService: { isAuthenticated: true } } };
-    const wrapper = createWrapper(userIsAuthenticated);
+    authService = createAuthService({ isAuthenticated: true });
+    const wrapper = createWrapper();
 
     const loginLink = wrapper.find('[data-selector="login-link"]');
     const registerLink = wrapper.find('[data-selector="register-link"]');
@@ -50,8 +60,8 @@ describe('HeaderMenu', () => {
   });
 
   it('should display logout links if user is authenticated', () => {
-    const userIsAuthenticated = { provide: { authService: { isAuthenticated: true } } };
-    const wrapper = createWrapper(userIsAuthenticated);
+    authService = createAuthService({ isAuthenticated: true });
+    const wrapper = createWrapper();
 
     const logoutLink = wrapper.find('[data-selector="logout-action"]');
 

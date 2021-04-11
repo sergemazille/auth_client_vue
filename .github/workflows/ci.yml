@@ -1,0 +1,34 @@
+name: CI
+
+on: push
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: ./client
+
+    steps:
+      # Checks out repository
+      - uses: actions/checkout@v2
+
+      # Utilisation d'un cache pour éviter de télécharger les dépendances de Node à chaque fois
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: installation des dépendances de Node
+        run: npm install
+        working-directory: ${{env.working-directory}}
+
+      - name: tests unitaires
+        run: npm run test:unit
+        working-directory: ${{env.working-directory}}
+
+      - name: tests e2e
+        run: npm run test:e2e:headless
+        working-directory: ${{env.working-directory}}

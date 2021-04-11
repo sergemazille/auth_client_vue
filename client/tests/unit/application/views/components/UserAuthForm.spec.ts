@@ -6,18 +6,6 @@ const createWrapper = () => {
 };
 
 describe('UserAuthForm', () => {
-  it('should be a Vue component', () => {
-    const wrapper = createWrapper();
-
-    expect(wrapper.exists()).toBeTruthy();
-  });
-
-  it('should have correct default props', () => {
-    const wrapper = createWrapper();
-
-    expect(wrapper.props('title')).toBe('');
-  });
-
   it('should not allow form submission when input fields are not valid', () => {
     const wrapper = createWrapper();
 

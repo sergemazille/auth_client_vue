@@ -18,12 +18,6 @@ const createWrapper = (opts?: Record<string, unknown>) => {
 };
 
 describe('HeaderMenu', () => {
-  it('should be a Vue component', () => {
-    const wrapper = createWrapper();
-
-    expect(wrapper.exists()).toBeTruthy();
-  });
-
   it('should display login and register links if user is not authenticated', () => {
     const userIsNotAuthenticated = { provide: { authService: { isAuthenticated: false } } };
     const wrapper = createWrapper(userIsNotAuthenticated);

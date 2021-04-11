@@ -4,11 +4,12 @@ import router from '@/infrastructure/VueRouter';
 import { AppRouterService } from '@/application/services/AppRouterService';
 
 let authService: any;
-const routerService: any = new AppRouterService(router)
+const routerService: any = new AppRouterService(router);
 
 const createAuthService = (opts?: Record<string, any>) => {
   return {
     isAuthenticated: false,
+    logOut: jest.fn(),
 
     ...opts,
   };
@@ -43,9 +44,9 @@ describe('HeaderMenu', () => {
     authService = createAuthService({ isAuthenticated: false });
     const wrapper = createWrapper();
 
-    const logoutLink = wrapper.find('[data-selector="logout-action"]');
+    const logoutAction = wrapper.find('[data-selector="logout-action"]');
 
-    expect(logoutLink.exists()).toBeFalsy();
+    expect(logoutAction.exists()).toBeFalsy();
   });
 
   it('should not display login and register links if user is authenticated', () => {
@@ -63,8 +64,20 @@ describe('HeaderMenu', () => {
     authService = createAuthService({ isAuthenticated: true });
     const wrapper = createWrapper();
 
-    const logoutLink = wrapper.find('[data-selector="logout-action"]');
+    const logoutAction = wrapper.find('[data-selector="logout-action"]');
 
-    expect(logoutLink.exists()).toBeTruthy();
+    expect(logoutAction.exists()).toBeTruthy();
+  });
+
+  it('should call logout authentication service when logout button is clicked', async () => {
+    expect.assertions(1);
+
+    authService = createAuthService({ isAuthenticated: true });
+    const wrapper = createWrapper();
+
+    const logoutAction = wrapper.find('[data-selector="logout-action"]');
+    await logoutAction.trigger('click');
+
+    expect(authService.logOut).toHaveBeenCalledTimes(1);
   });
 });

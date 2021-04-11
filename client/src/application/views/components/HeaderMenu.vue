@@ -6,7 +6,7 @@
       <router-link :to="{ name: routerService.routeName.LOGIN }" data-selector="login-link">Login</router-link>
       <router-link :to="{ name: routerService.routeName.REGISTER }" data-selector="register-link">Register</router-link>
     </div>
-    <button v-else data-selector="logout-action">Logout</button>
+    <button v-else @click="handleLogOut" data-selector="logout-action">Logout</button>
   </div>
 </template>
 
@@ -26,6 +26,12 @@ export default defineComponent({
   computed: {
     isAuthenticated(): boolean {
       return this.authService.isAuthenticated;
+    },
+  },
+
+  methods: {
+    handleLogOut(): void {
+      this.authService.logOut();
     },
   },
 });

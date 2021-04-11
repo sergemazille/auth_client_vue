@@ -1,4 +1,5 @@
-import { AuthService } from './AuthService';
+import { AuthService } from '@/application/services/AuthService';
+import { Credentials } from '@/application/Credentials';
 import { Store } from 'vuex';
 import { StoreAuth } from '@/infrastructure/auth/AuthStore';
 
@@ -9,7 +10,7 @@ export class AppAuthService implements AuthService {
     return this.store.getters['auth/isAuthenticated'];
   }
 
-  logIn(): void {
+  logIn(_credentials: Credentials): void {
     this.store.dispatch('auth/logIn');
   }
 

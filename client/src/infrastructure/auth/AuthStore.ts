@@ -1,5 +1,7 @@
 import { Module } from 'vuex';
 
+export type StoreAuth = { isAuthenticated: boolean };
+
 export const auth: Module<any, any> = {
   namespaced: true,
 

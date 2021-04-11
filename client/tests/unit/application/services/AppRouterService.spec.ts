@@ -1,12 +1,12 @@
+import router, { RouteName } from '@/infrastructure/VueRouter';
 import { AppRouterService } from '@/application/services/AppRouterService';
-import router from '@/infrastructure/VueRouter';
 
 describe('AppRouterService', () => {
   it('should return actual route name', async () => {
     const routerService = new AppRouterService(router);
 
-    await router.push({ name: 'login' });
+    await router.push({ name: RouteName.LOGIN });
 
-    expect(routerService.routeName).toBe('login');
+    expect(routerService.currentRouteName).toBe(RouteName.LOGIN);
   });
 });

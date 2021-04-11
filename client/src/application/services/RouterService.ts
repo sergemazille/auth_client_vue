@@ -1,3 +1,4 @@
 export interface RouterService {
-  routeName: string;
+  routeName: Record<string, string>;
+  currentRouteName: string;
 }

@@ -1,21 +1,28 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
+
 import Auth from '@/application/views/pages/Auth.vue';
 import Home from '@/application/views/pages/Home.vue';
+
+export enum RouteName {
+  HOME = 'HOME',
+  LOGIN = 'LOGIN',
+  REGISTER = 'REGISTER',
+}
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    name: RouteName.HOME,
     component: Home,
   },
   {
     path: '/login',
-    name: 'login',
+    name: RouteName.LOGIN,
     component: Auth,
   },
   {
     path: '/register',
-    name: 'register',
+    name: RouteName.REGISTER,
     component: Auth,
   },
 ];

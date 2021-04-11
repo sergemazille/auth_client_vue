@@ -17,10 +17,12 @@ describe('AppAuthService', () => {
   });
 
   it('should log user in', () => {
+    const credentials = { email: 'user@email.com', password: 'password' };
+
     store.state.auth.isAuthenticated = false;
     const authService = new AppAuthService(store);
 
-    authService.logIn();
+    authService.logIn(credentials);
 
     expect(authService.isAuthenticated).toBeTruthy();
   });
@@ -32,5 +34,16 @@ describe('AppAuthService', () => {
     authService.logOut();
 
     expect(authService.isAuthenticated).toBeFalsy();
+  });
+
+  it('should register user', () => {
+    const credentials = { email: 'user@email.com', password: 'password' };
+
+    store.state.auth.isAuthenticated = false;
+    const authService = new AppAuthService(store);
+
+    authService.register(credentials);
+
+    expect(authService.isAuthenticated).toBeTruthy();
   });
 });

@@ -49,4 +49,19 @@ describe('Auth page', () => {
     expect(authService.logIn).toHaveBeenCalledTimes(1);
     expect(authService.logIn).toHaveBeenCalledWith(credentials);
   });
+
+  it('should call register authentication service when the registration form has been submitted', () => {
+    const email = 'user@email.com';
+    const password = 'password';
+    const credentials = { email, password };
+
+    authService = { register: jest.fn() };
+    routerService = { currentRouteName: RouteName.REGISTER, routeName: { REGISTER: RouteName.REGISTER } };
+    const wrapper = createWrapper();
+
+    wrapper.vm.handleFormSubmission(credentials);
+
+    expect(authService.register).toHaveBeenCalledTimes(1);
+    expect(authService.register).toHaveBeenCalledWith(credentials);
+  });
 });

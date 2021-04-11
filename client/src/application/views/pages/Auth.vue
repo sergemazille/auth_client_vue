@@ -36,11 +36,17 @@ export default defineComponent({
     handleFormSubmission(credentials: Credentials): void {
       if (this.currentRouteName === this.routerService.routeName.LOGIN) {
         this.logUserIn(credentials);
+      } else {
+        this.registerUser(credentials);
       }
     },
 
     logUserIn(credentials: Credentials): void {
       this.authService.logIn(credentials);
+    },
+
+    registerUser(credentials: Credentials): void {
+      this.authService.register(credentials);
     },
   },
 });

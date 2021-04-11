@@ -10,6 +10,6 @@ export class AppRouterService implements RouterService {
   }
 
   get currentRouteName(): string {
-    return (this.router.currentRoute.value.name as string) || '';
+    return this.router.currentRoute.value.name as string;
   }
 }

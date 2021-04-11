@@ -17,4 +17,8 @@ export class AppAuthService implements AuthService {
   logOut(): void {
     this.store.dispatch('auth/logOut');
   }
+
+  register(_credentials: Credentials): void {
+    this.store.dispatch('auth/logIn');
+  }
 }

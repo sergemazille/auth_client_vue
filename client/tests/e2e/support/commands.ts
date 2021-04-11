@@ -23,3 +23,13 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('userIsAuthenticated', isAuthenticated => {
+  cy.window()
+    .its('store')
+    .then(store => {
+      store.state.auth.isAuthenticated = isAuthenticated;
+    });
+
+  cy.wait(0);
+});

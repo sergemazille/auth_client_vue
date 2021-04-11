@@ -1,17 +1,17 @@
-import { Password } from "@/domain/common/Password";
+import { Email } from '@/domain/common/Email';
 
-describe('Password', () => {
-  it('should throw when "password" has not at least 4 characters', () => {
-    const password = "abc";
-    const errorTrigger = () => new Password(password);
+describe('Email', () => {
+  it('should throw when "email" is not a valid email', () => {
+    const email = 'not a valid email';
+    const errorTrigger = () => new Email(email);
 
-    expect(errorTrigger).toThrow('Password is not valid');
+    expect(errorTrigger).toThrow('Email is not valid');
   });
 
-  it('should instantiate a Password when "password" is longer than 3 characters', () => {
-    const password = "abcd";
-    const validPassword = new Password(password);
+  it('should instantiate an Email when "email" is valid', () => {
+    const email = 'user@email.com';
+    const validEmail = new Email(email);
 
-    expect(validPassword).toBeInstanceOf(Password);
+    expect(validEmail).toBeInstanceOf(Email);
   });
-})
+});

@@ -1,12 +1,14 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
 import Auth from '@/application/views/pages/Auth.vue';
+import Dashboard from '@/application/views/pages/Dashboard.vue';
 import Home from '@/application/views/pages/Home.vue';
 
 export enum RouteName {
   HOME = 'HOME',
   LOGIN = 'LOGIN',
   REGISTER = 'REGISTER',
+  DASHBOARD = 'DASHBOARD',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -24,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/register',
     name: RouteName.REGISTER,
     component: Auth,
+  },
+  {
+    path: '/dashboard',
+    name: RouteName.DASHBOARD,
+    component: Dashboard,
   },
 ];
 

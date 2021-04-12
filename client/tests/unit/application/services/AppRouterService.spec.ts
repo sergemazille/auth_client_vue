@@ -1,5 +1,8 @@
-import router, { RouteName } from '@/infrastructure/VueRouter';
+import { RouteName, VueRouterFactory } from '@/infrastructure/VueRouterFactory';
 import { AppRouterService } from '@/application/services/AppRouterService';
+
+const authService: any = jest.fn();
+const { router } = new VueRouterFactory(authService);
 
 describe('AppRouterService', () => {
   it('should return actual route name', async () => {

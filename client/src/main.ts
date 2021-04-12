@@ -1,13 +1,14 @@
 import App from '@/application/views/App.vue';
-import { AppAuthService } from './application/services/AppAuthService';
-import { AppRouterService } from './application/services/AppRouterService';
+import { AppAuthService } from '@/application/services/AppAuthService';
+import { AppRouterService } from '@/application/services/AppRouterService';
 import { Store } from 'vuex';
 import { createApp } from 'vue';
-import router from '@/infrastructure/VueRouter';
+import { VueRouterFactory } from '@/infrastructure/VueRouterFactory';
 import store from '@/infrastructure/VuexStore';
 
 const app = createApp(App);
 const authService = new AppAuthService(store);
+const { router } = new VueRouterFactory(authService);
 const routerService = new AppRouterService(router);
 
 app.provide('authService', authService);

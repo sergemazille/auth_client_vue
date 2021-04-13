@@ -25,6 +25,8 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('userIsAuthenticated', isAuthenticated => {
+  cy.visit('/');
+
   cy.window()
     .its('store')
     .then(store => {

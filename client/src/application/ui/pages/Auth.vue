@@ -39,6 +39,8 @@ export default defineComponent({
       } else {
         this.registerUser(credentials);
       }
+
+      this.redirect();
     },
 
     logUserIn(credentials: Credentials): void {
@@ -47,6 +49,13 @@ export default defineComponent({
 
     registerUser(credentials: Credentials): void {
       this.authService.register(credentials);
+    },
+
+    redirect() {
+      const redirectPath = this.$route.query.redirect as string;
+      const route = redirectPath || '/';
+
+      this.$router.push(route);
     },
   },
 });

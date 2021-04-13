@@ -33,6 +33,7 @@ export class VueRouterFactory {
       path: '/dashboard',
       name: RouteName.DASHBOARD,
       component: Dashboard,
+      meta: { requiresAuth: true },
     },
   ];
 
@@ -41,9 +42,28 @@ export class VueRouterFactory {
   get router(): Router {
     const { routes } = this;
 
-    return createRouter({
+    const router = createRouter({
       history: createWebHistory(process.env.BASE_URL),
       routes,
     });
+
+    router.beforeEach((to, _from, next) => {
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if user is authenticated
+        // if not, redirect to login page.
+        if (!this.authService.isAuthenticated) {
+          next({
+            name: RouteName.LOGIN,
+            query: { redirect: to.fullPath },
+          });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    });
+
+    return router;
   }
 }

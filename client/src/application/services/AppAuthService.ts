@@ -7,18 +7,25 @@ export class AppAuthService implements AuthService {
   constructor(private readonly store: Store<StoreAuth>) {}
 
   get isAuthenticated(): boolean {
-    return this.store.getters['auth/isAuthenticated'];
+    const isAuthenticatedInMemory = this.store.getters['auth/isAuthenticated'];
+    const isAuthenticatedLocally = !!localStorage.getItem('isAuthenticated');
+
+    return isAuthenticatedInMemory || isAuthenticatedLocally;
   }
 
   logIn(_credentials: Credentials): void {
     this.store.dispatch('auth/logIn');
+
+    localStorage.setItem('isAuthenticated', JSON.stringify(true));
   }
 
   logOut(): void {
     this.store.dispatch('auth/logOut');
+
+    localStorage.removeItem('isAuthenticated');
   }
 
   register(_credentials: Credentials): void {
-    this.store.dispatch('auth/logIn');
+    this.logIn(_credentials);
   }
 }

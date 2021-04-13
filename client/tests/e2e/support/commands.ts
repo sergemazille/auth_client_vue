@@ -29,6 +29,7 @@ Cypress.Commands.add('userIsAuthenticated', isAuthenticated => {
     .its('store')
     .then(store => {
       store.state.auth.isAuthenticated = isAuthenticated;
+      localStorage.setItem('isAuthenticated', JSON.stringify(true));
     });
 
   cy.wait(0);

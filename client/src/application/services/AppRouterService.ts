@@ -3,7 +3,7 @@ import { RouterService } from '@/application/services/RouterService';
 import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
 
 export class AppRouterService implements RouterService {
-  constructor(private readonly router: Router) {}
+  constructor(public router: Router) {}
 
   get routeName(): any {
     return RouteName;

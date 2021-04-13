@@ -52,10 +52,12 @@ export default defineComponent({
     },
 
     redirect() {
-      const redirectPath = this.$route.query.redirect as string;
+      const { router } = this.routerService;
+      const currentRoute = router.currentRoute.value;
+      const redirectPath = currentRoute.query.redirect as string;
       const route = redirectPath || '/';
 
-      this.$router.push(route);
+      router.push(route);
     },
   },
 });

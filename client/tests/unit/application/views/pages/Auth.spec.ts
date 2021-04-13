@@ -16,9 +16,20 @@ const createWrapper = () => {
   });
 };
 
+const createRouterService = ({ currentRouteName }: any) => {
+  return {
+    currentRouteName,
+    routeName: { LOGIN: RouteName.LOGIN, REGISTER: RouteName.REGISTER },
+    router: {
+      currentRoute: { value: { query: {} } },
+      push: jest.fn(),
+    },
+  };
+};
+
 describe('Auth page', () => {
   it('should display login title on login page', () => {
-    routerService = { currentRouteName: RouteName.LOGIN };
+    routerService = createRouterService({ currentRouteName: RouteName.LOGIN });
     const wrapper = createWrapper();
 
     const expected = RouteName.LOGIN;
@@ -27,7 +38,7 @@ describe('Auth page', () => {
   });
 
   it('should display register title on register page', () => {
-    routerService = { currentRouteName: RouteName.REGISTER };
+    routerService = createRouterService({ currentRouteName: RouteName.REGISTER });
     const wrapper = createWrapper();
 
     const expected = RouteName.REGISTER;
@@ -41,7 +52,7 @@ describe('Auth page', () => {
     const credentials = { email, password };
 
     authService = { logIn: jest.fn() };
-    routerService = { currentRouteName: RouteName.LOGIN, routeName: { LOGIN: RouteName.LOGIN } };
+    routerService = createRouterService({ currentRouteName: RouteName.LOGIN });
     const wrapper = createWrapper();
 
     wrapper.vm.handleFormSubmission(credentials);
@@ -56,7 +67,7 @@ describe('Auth page', () => {
     const credentials = { email, password };
 
     authService = { register: jest.fn() };
-    routerService = { currentRouteName: RouteName.REGISTER, routeName: { REGISTER: RouteName.REGISTER } };
+    routerService = createRouterService({ currentRouteName: RouteName.REGISTER });
     const wrapper = createWrapper();
 
     wrapper.vm.handleFormSubmission(credentials);

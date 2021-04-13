@@ -1,5 +1,5 @@
 import { AppAuthService } from '@/application/services/AppAuthService';
-import store from '@/infrastructure/VuexStore';
+import store from '@/infrastructure/persistence/VuexStore';
 
 describe('AppAuthService', () => {
   it('should return correct authentication status when user is authenticated', () => {

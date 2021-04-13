@@ -3,8 +3,8 @@ import { AppAuthService } from '@/application/services/AppAuthService';
 import { AppRouterService } from '@/application/services/AppRouterService';
 import { Store } from 'vuex';
 import { createApp } from 'vue';
-import { VueRouterFactory } from '@/infrastructure/VueRouterFactory';
-import store from '@/infrastructure/VuexStore';
+import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
+import store from '@/infrastructure/persistence/VuexStore';
 
 const app = createApp(App);
 const authService = new AppAuthService(store);

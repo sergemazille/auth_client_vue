@@ -1,5 +1,5 @@
 import Auth from '@/application/ui/pages/Auth.vue';
-import { RouteName } from '@/infrastructure/VueRouterFactory';
+import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
 import { shallowMount } from '@vue/test-utils';
 
 let authService: any;

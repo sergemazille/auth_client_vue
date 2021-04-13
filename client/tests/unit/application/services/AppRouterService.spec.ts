@@ -1,4 +1,4 @@
-import { RouteName, VueRouterFactory } from '@/infrastructure/VueRouterFactory';
+import { RouteName, VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
 import { AppRouterService } from '@/application/services/AppRouterService';
 
 const authService: any = jest.fn();

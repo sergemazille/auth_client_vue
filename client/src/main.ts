@@ -1,4 +1,4 @@
-import App from '@/application/views/App.vue';
+import App from '@/application/ui/App.vue';
 import { AppAuthService } from '@/application/services/AppAuthService';
 import { AppRouterService } from '@/application/services/AppRouterService';
 import { Store } from 'vuex';

@@ -1,9 +1,9 @@
 import { RouteRecordRaw, Router, createRouter, createWebHistory } from 'vue-router';
 
-import Auth from '@/application/views/pages/Auth.vue';
+import Auth from '@/application/ui/pages/Auth.vue';
 import { AuthService } from '@/application/services/AuthService';
-import Dashboard from '@/application/views/pages/Dashboard.vue';
-import Home from '@/application/views/pages/Home.vue';
+import Dashboard from '@/application/ui/pages/Dashboard.vue';
+import Home from '@/application/ui/pages/Home.vue';
 
 export enum RouteName {
   HOME = 'HOME',

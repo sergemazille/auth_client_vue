@@ -1,4 +1,4 @@
-import { Email } from '@/domain/common/Email';
+import { Email } from '@/application/models/Email';
 
 describe('Email', () => {
   it('should throw when "email" is not a valid email', () => {

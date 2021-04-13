@@ -1,4 +1,4 @@
-import { Credentials } from '@/application/Credentials';
+import { Credentials } from '@/application/models/Credentials';
 
 export interface AuthService {
   isAuthenticated: boolean;

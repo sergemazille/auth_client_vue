@@ -1,4 +1,4 @@
-import { Password } from '@/domain/common/Password';
+import { Password } from '@/application/models/Password';
 
 describe('Password', () => {
   it('should throw when "password" has not at least 4 characters', () => {

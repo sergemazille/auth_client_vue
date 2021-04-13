@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Email } from '@/domain/common/Email';
-import { Password } from '@/domain/common/Password';
+import { Email } from '@/application/models/Email';
+import { Password } from '@/application/models/Password';
 
 export default defineComponent({
   data() {

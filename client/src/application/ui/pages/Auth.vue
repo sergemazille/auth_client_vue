@@ -5,10 +5,10 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import UserAuthForm from '@/application/views/components/UserAuthForm.vue';
+import UserAuthForm from '@/application/ui/components/UserAuthForm.vue';
 import { RouterService } from '@/application/services/RouterService';
 import { AuthService } from '@/application/services/AuthService';
-import { Credentials } from '@/application/Credentials';
+import { Credentials } from '@/application/models/Credentials';
 
 export default defineComponent({
   setup() {

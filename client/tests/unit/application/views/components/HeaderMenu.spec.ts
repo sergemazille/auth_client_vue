@@ -1,4 +1,4 @@
-import HeaderMenu from '@/application/views/components/HeaderMenu.vue';
+import HeaderMenu from '@/application/ui/components/HeaderMenu.vue';
 import { shallowMount } from '@vue/test-utils';
 import { VueRouterFactory } from '@/infrastructure/VueRouterFactory';
 import { AppRouterService } from '@/application/services/AppRouterService';

@@ -1,5 +1,5 @@
 import { AuthService } from '@/application/services/AuthService';
-import { Credentials } from '@/application/Credentials';
+import { Credentials } from '@/application/models/Credentials';
 import { Store } from 'vuex';
 import { StoreAuth } from '@/infrastructure/auth/AuthStore';
 

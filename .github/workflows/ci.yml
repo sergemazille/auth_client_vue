@@ -3,11 +3,8 @@ name: CI
 on: push
 
 jobs:
-  client:
+  tests:
     runs-on: ubuntu-latest
-
-    env:
-      working-directory: ./client
 
     steps:
       # Checks out repository
@@ -23,12 +20,9 @@ jobs:
 
       - name: installation des dépendances de Node
         run: npm install
-        working-directory: ${{env.working-directory}}
 
       - name: tests unitaires
         run: npm run test:unit
-        working-directory: ${{env.working-directory}}
 
       - name: tests e2e
         run: npm run test:e2e:headless
-        working-directory: ${{env.working-directory}}

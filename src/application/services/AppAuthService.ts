@@ -8,24 +8,49 @@ export class AppAuthService implements AuthService {
 
   get isAuthenticated(): boolean {
     const isAuthenticatedInMemory = this.store.getters['auth/isAuthenticated'];
-    const isAuthenticatedLocally = !!localStorage.getItem('isAuthenticated');
+    const isAuthenticatedLocally = this.isAuthenticatedLocally();
 
     return isAuthenticatedInMemory || isAuthenticatedLocally;
   }
 
   logIn(_credentials: Credentials): void {
-    this.store.dispatch('auth/logIn');
-
-    localStorage.setItem('isAuthenticated', JSON.stringify(true));
+    this.logInMemory();
+    this.logInLocally();
   }
 
   logOut(): void {
-    this.store.dispatch('auth/logOut');
-
-    localStorage.removeItem('isAuthenticated');
+    this.logOutFromMemory();
+    this.logOutLocally();
   }
 
   register(_credentials: Credentials): void {
     this.logIn(_credentials);
+  }
+
+  private isAuthenticatedLocally(): boolean {
+    const storageRawData = localStorage.getItem('isAuthenticated');
+
+    if (storageRawData) {
+      return JSON.parse(storageRawData);
+    }
+
+    return false;
+  }
+
+  private logInMemory() {
+    this.store.dispatch('auth/logIn');
+  }
+
+  private logInLocally() {
+    const isAuthenticated = JSON.stringify(true);
+    localStorage.setItem('isAuthenticated', isAuthenticated);
+  }
+
+  private logOutFromMemory(): void {
+    this.store.dispatch('auth/logOut');
+  }
+
+  private logOutLocally(): void {
+    localStorage.removeItem('isAuthenticated');
   }
 }

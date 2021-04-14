@@ -18,11 +18,12 @@ app.use(router);
 
 app.mount('#app');
 
-/* e2e testing */
+/* tests config */
 
 declare global {
   interface Window {
     store: Store<any>;
+    localStorage: any;
     Cypress: any;
   }
 }

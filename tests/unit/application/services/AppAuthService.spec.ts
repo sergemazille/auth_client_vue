@@ -1,7 +1,14 @@
 import { AppAuthService } from '@/application/services/AppAuthService';
 import store from '@/infrastructure/persistence/VuexStore';
+import { LocalStorageMock } from 'tests/unit/support/LocalStorageMock';
+
+window.localStorage = new LocalStorageMock();
 
 describe('AppAuthService', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it('should return correct authentication status when user is authenticated', () => {
     store.state.auth.isAuthenticated = true;
     const authService = new AppAuthService(store);
@@ -25,6 +32,7 @@ describe('AppAuthService', () => {
     authService.logIn(credentials);
 
     expect(authService.isAuthenticated).toBeTruthy();
+    expect(localStorage.getItem('isAuthenticated')).toBeTruthy();
   });
 
   it('should log user out', () => {
@@ -34,6 +42,7 @@ describe('AppAuthService', () => {
     authService.logOut();
 
     expect(authService.isAuthenticated).toBeFalsy();
+    expect(localStorage.getItem('isAuthenticated')).toBeFalsy();
   });
 
   it('should register user', () => {

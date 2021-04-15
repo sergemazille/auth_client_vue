@@ -3,4 +3,8 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest',
   },
+  coveragePathIgnorePatterns: ['<rootDir>/tests/unit/support/'],
+  moduleNameMapper: {
+    '@unit(.*)$': '<rootDir>/tests/unit/$1',
+  },
 };

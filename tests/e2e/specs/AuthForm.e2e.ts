@@ -1,4 +1,4 @@
-describe('UserAuthForm', () => {
+describe('AuthForm', () => {
   it('submit button is disabled as a default state', () => {
     cy.visit('/login');
 

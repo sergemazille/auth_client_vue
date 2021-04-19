@@ -1,11 +1,11 @@
-import UserAuthForm from '@/application/ui/components/UserAuthForm.vue';
+import AuthForm from '@/application/ui/components/AuthForm.vue';
 import { shallowMount } from '@vue/test-utils';
 
 const createWrapper = () => {
-  return shallowMount(UserAuthForm);
+  return shallowMount(AuthForm);
 };
 
-describe('UserAuthForm', () => {
+describe('AuthForm', () => {
   it('should not allow form submission when input fields are not valid', () => {
     const wrapper = createWrapper();
 

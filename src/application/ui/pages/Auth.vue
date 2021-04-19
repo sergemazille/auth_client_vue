@@ -1,11 +1,11 @@
 <template>
   <h1 v-text="pageTitle" />
-  <UserAuthForm @form-submitted="handleFormSubmission" />
+  <AuthForm @form-submitted="handleFormSubmission" />
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import UserAuthForm from '@/application/ui/components/UserAuthForm.vue';
+import AuthForm from '@/application/ui/components/AuthForm.vue';
 import { RouterService } from '@/application/services/RouterService';
 import { AuthService } from '@/application/services/AuthService';
 import { Credentials } from '@/application/models/Credentials';
@@ -19,7 +19,7 @@ export default defineComponent({
   },
 
   components: {
-    UserAuthForm,
+    AuthForm,
   },
 
   computed: {

@@ -15,6 +15,7 @@
 <script lang="ts">
 import { AuthService } from '@/application/services/AuthService';
 import { RouterService } from '@/application/services/RouterService';
+import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
 import { defineComponent, inject } from 'vue';
 
 export default defineComponent({
@@ -40,6 +41,7 @@ export default defineComponent({
   methods: {
     handleLogOut(): void {
       this.authService.logOut();
+      this.routerService.router.push({ name: RouteName.HOME });
     },
   },
 });

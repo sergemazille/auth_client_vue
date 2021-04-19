@@ -16,11 +16,12 @@ describe('HeaderMenu', () => {
     cy.get('.header-menu').should('contain.text', 'Dashboard');
   });
 
-  it('should visit login page when user clicks on dashboard link', () => {
+  it('should visit login page when user clicks on dashboard link while not authenticated', () => {
     cy.visit('/');
+    cy.userIsAuthenticated(false);
     cy.get('[data-selector="dashboard-link"]').click();
 
-    cy.url().should('include', '/dashboard');
+    cy.url().should('include', '/login');
   });
 
   it('should visit registration page when user clicks on register link', () => {
@@ -31,8 +32,16 @@ describe('HeaderMenu', () => {
   });
 
   it('should visit home page when user clicks on home link', () => {
-    cy.visit('/dashboard');
+    cy.visit('/login');
     cy.get('[data-selector="home"]').click();
+
+    cy.contains('Accueil').should('be.visible');
+  });
+
+  it('should be redirected to home page when user is logged out', () => {
+    cy.userIsAuthenticated(true);
+    cy.visit('/dashboard');
+    cy.get('[data-selector="logout-action"]').click();
 
     cy.contains('Accueil').should('be.visible');
   });

@@ -17,7 +17,8 @@ const createAuthService = (opts?: Record<string, any>) => {
 
 const createWrapper = () => {
   const { router } = new VueRouterFactory(routes, authService);
-  const routerService: any = new AppRouterService(router);
+  const routerService = new AppRouterService(router);
+  routerService.router.push = jest.fn();
 
   return shallowMount(HeaderMenu, {
     global: {

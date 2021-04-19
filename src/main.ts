@@ -5,10 +5,11 @@ import { Store } from 'vuex';
 import { createApp } from 'vue';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
 import store from '@/infrastructure/persistence/VuexStore';
+import { routes } from '@/infrastructure/routing/routes';
 
 const app = createApp(App);
 const authService = new AppAuthService(store);
-const { router } = new VueRouterFactory(authService);
+const { router } = new VueRouterFactory(routes, authService);
 const routerService = new AppRouterService(router);
 
 app.provide('authService', authService);

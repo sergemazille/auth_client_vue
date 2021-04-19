@@ -2,6 +2,7 @@ import HeaderMenu from '@/application/ui/components/HeaderMenu.vue';
 import { shallowMount } from '@vue/test-utils';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
 import { AppRouterService } from '@/application/services/AppRouterService';
+import { routes } from '@/infrastructure/routing/routes';
 
 let authService: any = jest.fn();
 
@@ -15,7 +16,7 @@ const createAuthService = (opts?: Record<string, any>) => {
 };
 
 const createWrapper = () => {
-  const { router } = new VueRouterFactory(authService);
+  const { router } = new VueRouterFactory(routes, authService);
   const routerService: any = new AppRouterService(router);
 
   return shallowMount(HeaderMenu, {

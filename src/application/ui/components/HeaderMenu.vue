@@ -2,23 +2,13 @@
   <div class="header-menu">
     <router-link data-selector="home" :to="{ name: routerService.routeName.HOME }">Accueil</router-link>
 
-    <div v-if="!isAuthenticated">
-      <router-link
-        v-if="routerService.currentRouteName !== routerService.routeName.LOGIN"
-        :to="{ name: routerService.routeName.LOGIN }"
-        data-selector="login-link"
-      >
-        Login
-      </router-link>
-      <router-link
-        v-if="routerService.currentRouteName !== routerService.routeName.REGISTER"
-        :to="{ name: routerService.routeName.REGISTER }"
-        data-selector="register-link"
-      >
+    <div>
+      <router-link :to="{ name: routerService.routeName.DASHBOARD }" data-selector="dashboard-link">Dashboard</router-link>
+      <router-link v-if="showRegisterLink" :to="{ name: routerService.routeName.REGISTER }" data-selector="register-link">
         Register
       </router-link>
+      <button v-if="isAuthenticated" @click="handleLogOut" data-selector="logout-action">Logout</button>
     </div>
-    <button v-else @click="handleLogOut" data-selector="logout-action">Logout</button>
   </div>
 </template>
 
@@ -39,6 +29,12 @@ export default defineComponent({
     isAuthenticated(): boolean {
       return this.authService.isAuthenticated;
     },
+
+    showRegisterLink(): boolean {
+      const isOnRegisterPage = this.routerService.currentRouteName === this.routerService.routeName.REGISTER;
+
+      return !isOnRegisterPage && !this.isAuthenticated;
+    },
   },
 
   methods: {
@@ -53,8 +49,10 @@ export default defineComponent({
 .header-menu {
   display: flex;
   justify-content: space-between;
+  height: 24px;
 
-  a:last-of-type {
+  a:last-of-type,
+  button {
     margin-left: 12px;
   }
 }

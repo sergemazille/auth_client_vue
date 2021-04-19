@@ -4,7 +4,7 @@ describe('HeaderMenu', () => {
     cy.userIsAuthenticated(false);
 
     cy.get('.header-menu').should('contain.text', 'Accueil');
-    cy.get('.header-menu').should('contain.text', 'Login');
+    cy.get('.header-menu').should('contain.text', 'Dashboard');
     cy.get('.header-menu').should('contain.text', 'Register');
   });
 
@@ -13,14 +13,14 @@ describe('HeaderMenu', () => {
     cy.userIsAuthenticated(true);
 
     cy.get('.header-menu').should('contain.text', 'Logout');
-    cy.get('.header-menu').should('not.contain.text', 'Login');
+    cy.get('.header-menu').should('contain.text', 'Dashboard');
   });
 
-  it('should visit login page when user clicks on login link', () => {
+  it('should visit login page when user clicks on dashboard link', () => {
     cy.visit('/');
-    cy.get('[data-selector="login-link"]').click();
+    cy.get('[data-selector="dashboard-link"]').click();
 
-    cy.url().should('include', '/login');
+    cy.url().should('include', '/dashboard');
   });
 
   it('should visit registration page when user clicks on register link', () => {
@@ -31,7 +31,7 @@ describe('HeaderMenu', () => {
   });
 
   it('should visit home page when user clicks on home link', () => {
-    cy.visit('/login');
+    cy.visit('/dashboard');
     cy.get('[data-selector="home"]').click();
 
     cy.contains('Accueil').should('be.visible');

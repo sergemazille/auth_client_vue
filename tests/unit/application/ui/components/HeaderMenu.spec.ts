@@ -32,14 +32,14 @@ const createWrapper = () => {
 };
 
 describe('HeaderMenu', () => {
-  it('should display login and register links if user is not authenticated', () => {
+  it('should display dashboard and register links when user is not authenticated', () => {
     authService = createAuthService({ isAuthenticated: false });
     const wrapper = createWrapper();
 
-    const loginLink = wrapper.find('[data-selector="login-link"]');
+    const dashboardLink = wrapper.find('[data-selector="dashboard-link"]');
     const registerLink = wrapper.find('[data-selector="register-link"]');
 
-    expect(loginLink.exists()).toBeTruthy();
+    expect(dashboardLink.exists()).toBeTruthy();
     expect(registerLink.exists()).toBeTruthy();
   });
 
@@ -52,18 +52,25 @@ describe('HeaderMenu', () => {
     expect(logoutAction.exists()).toBeFalsy();
   });
 
-  it('should not display login and register links if user is authenticated', () => {
+  it('should not display register link if user is authenticated', () => {
     authService = createAuthService({ isAuthenticated: true });
     const wrapper = createWrapper();
 
-    const loginLink = wrapper.find('[data-selector="login-link"]');
     const registerLink = wrapper.find('[data-selector="register-link"]');
 
-    expect(loginLink.exists()).toBeFalsy();
     expect(registerLink.exists()).toBeFalsy();
   });
 
-  it('should display logout links if user is authenticated', () => {
+  it('should display dashboard link if user is authenticated', () => {
+    authService = createAuthService({ isAuthenticated: true });
+    const wrapper = createWrapper();
+
+    const dashboardLink = wrapper.find('[data-selector="dashboard-link"]');
+
+    expect(dashboardLink.exists()).toBeTruthy();
+  });
+
+  it('should display logout link if user is authenticated', () => {
     authService = createAuthService({ isAuthenticated: true });
     const wrapper = createWrapper();
 

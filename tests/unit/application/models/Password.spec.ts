@@ -1,17 +1,17 @@
 import { Password } from '@/application/models/Password';
 
 describe('Password', () => {
-  it('should throw when "password" has not at least 4 characters', () => {
+  it('should tell a "password" is not valid if it has not at least 4 characters', () => {
     const password = 'abc';
-    const errorTrigger = () => new Password(password);
+    const isPasswordValid = Password.isValid(password);
 
-    expect(errorTrigger).toThrow('Password is not valid');
+    expect(isPasswordValid).toBeFalsy();
   });
 
-  it('should instantiate a Password when "password" is longer than 3 characters', () => {
+  it('should tell a "password" is valid if it has more than 3 characters', () => {
     const password = 'abcd';
-    const validPassword = new Password(password);
+    const isPasswordValid = Password.isValid(password);
 
-    expect(validPassword).toBeInstanceOf(Password);
+    expect(isPasswordValid).toBeTruthy();
   });
 });

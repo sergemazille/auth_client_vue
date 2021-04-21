@@ -3,7 +3,9 @@
     <router-link data-selector="home" :to="{ name: routerService.routeName.HOME }">Accueil</router-link>
 
     <div>
-      <router-link :to="{ name: routerService.routeName.DASHBOARD }" data-selector="dashboard-link">Dashboard</router-link>
+      <router-link v-if="showDashboardLink" :to="{ name: routerService.routeName.DASHBOARD }" data-selector="dashboard-link">
+        Dashboard
+      </router-link>
       <router-link v-if="showRegisterLink" :to="{ name: routerService.routeName.REGISTER }" data-selector="register-link">
         Register
       </router-link>
@@ -35,6 +37,12 @@ export default defineComponent({
       const isOnRegisterPage = this.routerService.currentRouteName === this.routerService.routeName.REGISTER;
 
       return !isOnRegisterPage && !this.isAuthenticated;
+    },
+
+    showDashboardLink(): boolean {
+      const isOnDashboardPage = this.routerService.currentRouteName === this.routerService.routeName.DASHBOARD;
+
+      return !isOnDashboardPage;
     },
   },
 

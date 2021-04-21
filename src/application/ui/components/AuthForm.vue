@@ -33,7 +33,7 @@ export default defineComponent({
     },
 
     isValidPassword(password: string): boolean {
-      return password.length >= Password.MIN_LENGTH;
+      return Password.isValid(password);
     },
 
     handleFormSubmission() {

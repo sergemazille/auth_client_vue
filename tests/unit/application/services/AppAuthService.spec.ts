@@ -24,7 +24,7 @@ describe('AppAuthService', () => {
   });
 
   it('should log user in', () => {
-    const credentials = { email: 'user@email.com', password: 'password' };
+    const credentials: any = { email: 'user@email.com', password: 'password' };
 
     store.state.auth.isAuthenticated = false;
     const authService = new AppAuthService(store);
@@ -46,7 +46,7 @@ describe('AppAuthService', () => {
   });
 
   it('should register user', () => {
-    const credentials = { email: 'user@email.com', password: 'password' };
+    const credentials: any = { email: 'user@email.com', password: 'password' };
 
     store.state.auth.isAuthenticated = false;
     const authService = new AppAuthService(store);

@@ -1,5 +1,5 @@
 import { Router } from 'vue-router';
-import { RouterService } from '@/application/services/RouterService';
+import { RouterService } from '@/application/services/routing/RouterService';
 import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
 
 export class AppRouterService implements RouterService {

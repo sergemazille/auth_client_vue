@@ -1,5 +1,5 @@
 import { Router, createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { AuthService } from '@/application/services/AuthService';
+import { AuthService } from '@/application/services/auth/AuthService';
 
 export enum RouteName {
   HOME = 'HOME',

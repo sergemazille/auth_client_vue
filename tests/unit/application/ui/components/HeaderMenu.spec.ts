@@ -1,7 +1,7 @@
 import HeaderMenu from '@/application/ui/components/HeaderMenu.vue';
 import { shallowMount } from '@vue/test-utils';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
-import { AppRouterService } from '@/application/services/AppRouterService';
+import { AppRouterService } from '@/application/services/routing/AppRouterService';
 import { routes } from '@/infrastructure/routing/routes';
 
 let authService: any = jest.fn();

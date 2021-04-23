@@ -1,6 +1,6 @@
 import App from '@/application/ui/App.vue';
-import { AppAuthService } from '@/application/services/AppAuthService';
-import { AppRouterService } from '@/application/services/AppRouterService';
+import { AppAuthService } from '@/application/services/auth/AppAuthService';
+import { AppRouterService } from '@/application/services/routing/AppRouterService';
 import { Store } from 'vuex';
 import { createApp } from 'vue';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';

@@ -1,5 +1,5 @@
 import { RouteName, VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
-import { AppRouterService } from '@/application/services/AppRouterService';
+import { AppRouterService } from '@/application/services/routing/AppRouterService';
 import { routes } from '@/infrastructure/routing/routes';
 
 describe('AppRouterService', () => {

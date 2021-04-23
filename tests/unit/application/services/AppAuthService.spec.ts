@@ -1,4 +1,4 @@
-import { AppAuthService } from '@/application/services/AppAuthService';
+import { AppAuthService } from '@/application/services/auth/AppAuthService';
 import store from '@/infrastructure/persistence/VuexStore';
 import { LocalStorageMock } from '@unit/support/LocalStorageMock';
 

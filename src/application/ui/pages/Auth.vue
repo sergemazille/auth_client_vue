@@ -33,9 +33,9 @@ export default defineComponent({
   },
 
   methods: {
-    handleFormSubmission(credentials: Credentials): void {
+    async handleFormSubmission(credentials: Credentials): Promise<void> {
       if (this.currentRouteName === this.routerService.routeName.LOGIN) {
-        this.logUserIn(credentials);
+        await this.logUserIn(credentials);
       } else {
         this.registerUser(credentials);
       }
@@ -43,8 +43,8 @@ export default defineComponent({
       this.redirect();
     },
 
-    logUserIn(credentials: Credentials): void {
-      this.authService.logIn(credentials);
+    async logUserIn(credentials: Credentials): Promise<void> {
+      await this.authService.logIn(credentials);
     },
 
     registerUser(credentials: Credentials): void {

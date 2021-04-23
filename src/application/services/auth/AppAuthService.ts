@@ -1,10 +1,11 @@
 import { AuthService } from '@/application/services/auth/AuthService';
+import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
 import { Store } from 'vuex';
 import { StoreAuth } from '@/infrastructure/persistence/auth/AuthStore';
 
 export class AppAuthService implements AuthService {
-  constructor(private readonly store: Store<StoreAuth>) {}
+  constructor(private readonly store: Store<StoreAuth>, public readonly apiCaller: CallerService) {}
 
   get isAuthenticated(): boolean {
     const isAuthenticatedInMemory = this.store.getters['auth/isAuthenticated'];
@@ -13,7 +14,18 @@ export class AppAuthService implements AuthService {
     return isAuthenticatedInMemory || isAuthenticatedLocally;
   }
 
-  logIn(_credentials: Credentials): void {
+  async logIn(credentials: Credentials): Promise<void> {
+    if (this.isAuthenticated) {
+      return;
+    }
+
+    try {
+      await this.validateCredentials(credentials);
+    } catch (error) {
+      // do something with error.message
+      return;
+    }
+
     this.logInMemory();
     this.logInLocally();
   }
@@ -23,8 +35,8 @@ export class AppAuthService implements AuthService {
     this.logOutLocally();
   }
 
-  register(_credentials: Credentials): void {
-    this.logIn(_credentials);
+  async register(_credentials: Credentials): Promise<void> {
+    await this.logIn(_credentials);
   }
 
   private isAuthenticatedLocally(): boolean {
@@ -52,5 +64,14 @@ export class AppAuthService implements AuthService {
 
   private logOutLocally(): void {
     localStorage.removeItem('isAuthenticated');
+  }
+
+  private async validateCredentials(credentials: Credentials): Promise<void> {
+    const {
+      caller,
+      endpoints: { LOGIN },
+    } = this.apiCaller;
+
+    await caller.post(LOGIN, credentials);
   }
 }

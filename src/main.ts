@@ -1,14 +1,20 @@
 import App from '@/application/ui/App.vue';
 import { AppAuthService } from '@/application/services/auth/AppAuthService';
 import { AppRouterService } from '@/application/services/routing/AppRouterService';
+import { AxiosCaller } from './infrastructure/http/AxiosCaller';
 import { Store } from 'vuex';
-import { createApp } from 'vue';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
-import store from '@/infrastructure/persistence/VuexStore';
+import axios from 'axios';
+import { createApp } from 'vue';
+import { endpoints } from '@/infrastructure/http/endpoints';
 import { routes } from '@/infrastructure/routing/routes';
+import store from '@/infrastructure/persistence/VuexStore';
 
 const app = createApp(App);
-const authService = new AppAuthService(store);
+const baseURL = process.env.VUE_APP_API_BASE_URL;
+const callerInstance = axios.create({ baseURL, withCredentials: true });
+const apiCaller = new AxiosCaller(callerInstance, endpoints);
+const authService = new AppAuthService(store, apiCaller);
 const { router } = new VueRouterFactory(routes, authService);
 const routerService = new AppRouterService(router);
 

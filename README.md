@@ -1,4 +1,4 @@
-# auth_with_deno
+# Authentication project - client side, with Vue3
 
 ## Project setup
 ```

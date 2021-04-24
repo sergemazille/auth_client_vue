@@ -7,7 +7,7 @@ import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
 import axios from 'axios';
 import { createApp } from 'vue';
 import { endpoints } from '@/infrastructure/http/endpoints';
-import { routes } from '@/infrastructure/routing/routes';
+import { createAppRoutes } from '@/infrastructure/routing/routes';
 import { startFakeApiServer } from './infrastructure/fixtures/fakeApiServer';
 import store from '@/infrastructure/persistence/VuexStore';
 
@@ -16,6 +16,7 @@ const baseURL = process.env.VUE_APP_API_BASE_URL;
 const callerInstance = axios.create({ baseURL, withCredentials: true });
 const apiCaller = new AxiosCaller(callerInstance, endpoints);
 const authService = new AppAuthService(store, apiCaller);
+const routes = createAppRoutes(authService);
 const { router } = new VueRouterFactory(routes, authService);
 const routerService = new AppRouterService(router);
 

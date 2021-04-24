@@ -26,4 +26,12 @@ describe('AuthNavigation', () => {
 
     cy.contains('Accès autorisé uniquement à un utilisateur authentifié').should('not.exist');
   });
+
+  it.only('should be redirected to home page when trying to visit login page while already beeing authenticated', () => {
+    cy.userIsAuthenticated(true);
+
+    cy.visit('/login');
+
+    cy.contains('Accès autorisé à tous les visiteurs').should('be.visible');
+  });
 });

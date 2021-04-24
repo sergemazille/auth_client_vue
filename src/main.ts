@@ -19,6 +19,11 @@ const authService = new AppAuthService(store, apiCaller);
 const { router } = new VueRouterFactory(routes, authService);
 const routerService = new AppRouterService(router);
 
+// log user in memory if already authenticated in local storage
+if (authService.isAuthenticated) {
+  store.dispatch('auth/logIn');
+}
+
 app.provide('authService', authService);
 app.provide('routerService', routerService);
 

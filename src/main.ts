@@ -1,4 +1,4 @@
-import App from '@/application/ui/App.vue';
+import App from '@/infrastructure/ui/App.vue';
 import { AppAuthService } from '@/application/services/auth/AppAuthService';
 import { AppRouterService } from '@/application/services/routing/AppRouterService';
 import { AxiosCaller } from './infrastructure/http/AxiosCaller';

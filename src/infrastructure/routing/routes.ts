@@ -1,6 +1,6 @@
-import Auth from '@/application/ui/pages/Auth.vue';
-import Dashboard from '@/application/ui/pages/Dashboard.vue';
-import Home from '@/application/ui/pages/Home.vue';
+import Auth from '@/infrastructure/ui/pages/Auth.vue';
+import Dashboard from '@/infrastructure/ui/pages/Dashboard.vue';
+import Home from '@/infrastructure/ui/pages/Home.vue';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 
 export const routes = [

@@ -1,4 +1,4 @@
-import Auth from '@/application/ui/pages/Auth.vue';
+import Auth from '@/infrastructure/ui/pages/Auth.vue';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 import { shallowMount } from '@vue/test-utils';
 

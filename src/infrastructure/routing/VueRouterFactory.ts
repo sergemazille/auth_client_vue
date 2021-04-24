@@ -15,8 +15,8 @@ export class VueRouterFactory {
 
     router.beforeEach((to, _from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if user is authenticated
-        // if not, redirect to login page.
+        // this route requires user to be authenticated,
+        // else, redirect to login page.
         if (!this.authService.isAuthenticated) {
           next({
             name: routeNames.LOGIN,

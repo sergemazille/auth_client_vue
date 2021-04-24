@@ -34,7 +34,7 @@ export default defineComponent({
 
   methods: {
     async handleFormSubmission(credentials: Credentials): Promise<void> {
-      if (this.currentRouteName === this.routerService.routeName.LOGIN) {
+      if (this.currentRouteName === this.routerService.routeNames.LOGIN) {
         await this.logUserIn(credentials);
       } else {
         this.registerUser(credentials);

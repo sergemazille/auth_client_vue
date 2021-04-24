@@ -1,12 +1,6 @@
-import { Router, createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw, Router, createRouter, createWebHistory } from 'vue-router';
 import { AuthService } from '@/application/services/auth/AuthService';
-
-export enum RouteName {
-  HOME = 'HOME',
-  LOGIN = 'LOGIN',
-  REGISTER = 'REGISTER',
-  DASHBOARD = 'DASHBOARD',
-}
+import { routeNames } from '@/infrastructure/routing/routeNames';
 
 export class VueRouterFactory {
   constructor(private readonly routes: Array<RouteRecordRaw>, private readonly authService: AuthService) {}
@@ -25,7 +19,7 @@ export class VueRouterFactory {
         // if not, redirect to login page.
         if (!this.authService.isAuthenticated) {
           next({
-            name: RouteName.LOGIN,
+            name: routeNames.LOGIN,
             query: { redirect: to.fullPath },
           });
         } else {

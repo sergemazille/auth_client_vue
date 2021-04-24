@@ -1,12 +1,12 @@
 <template>
   <div class="header-menu">
-    <router-link data-selector="home" :to="{ name: routerService.routeName.HOME }">Accueil</router-link>
+    <router-link data-selector="home" :to="{ name: routerService.routeNames.HOME }">Accueil</router-link>
 
     <div>
-      <router-link v-if="showDashboardLink" :to="{ name: routerService.routeName.DASHBOARD }" data-selector="dashboard-link">
+      <router-link v-if="showDashboardLink" :to="{ name: routerService.routeNames.DASHBOARD }" data-selector="dashboard-link">
         Dashboard
       </router-link>
-      <router-link v-if="showRegisterLink" :to="{ name: routerService.routeName.REGISTER }" data-selector="register-link">
+      <router-link v-if="showRegisterLink" :to="{ name: routerService.routeNames.REGISTER }" data-selector="register-link">
         Register
       </router-link>
       <button v-if="isAuthenticated" @click="handleLogOut" data-selector="logout-action">Logout</button>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { AuthService } from '@/application/services/auth/AuthService';
 import { RouterService } from '@/application/services/routing/RouterService';
-import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
+import { routeNames } from '@/infrastructure/routing/routeNames';
 import { defineComponent, inject } from 'vue';
 
 export default defineComponent({
@@ -34,13 +34,13 @@ export default defineComponent({
     },
 
     showRegisterLink(): boolean {
-      const isOnRegisterPage = this.routerService.currentRouteName === this.routerService.routeName.REGISTER;
+      const isOnRegisterPage = this.routerService.currentRouteName === this.routerService.routeNames.REGISTER;
 
       return !isOnRegisterPage && !this.isAuthenticated;
     },
 
     showDashboardLink(): boolean {
-      const isOnDashboardPage = this.routerService.currentRouteName === this.routerService.routeName.DASHBOARD;
+      const isOnDashboardPage = this.routerService.currentRouteName === this.routerService.routeNames.DASHBOARD;
 
       return !isOnDashboardPage;
     },
@@ -49,7 +49,7 @@ export default defineComponent({
   methods: {
     handleLogOut(): void {
       this.authService.logOut();
-      this.routerService.router.push({ name: RouteName.HOME });
+      this.routerService.router.push({ name: routeNames.HOME });
     },
   },
 });

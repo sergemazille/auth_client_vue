@@ -1,5 +1,5 @@
 import Auth from '@/application/ui/pages/Auth.vue';
-import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
+import { routeNames } from '@/infrastructure/routing/routeNames';
 import { shallowMount } from '@vue/test-utils';
 
 let authService: any;
@@ -19,7 +19,7 @@ const createWrapper = () => {
 const createRouterService = ({ currentRouteName }: any) => {
   return {
     currentRouteName,
-    routeName: { LOGIN: RouteName.LOGIN, REGISTER: RouteName.REGISTER },
+    routeNames: { LOGIN: routeNames.LOGIN, REGISTER: routeNames.REGISTER },
     router: {
       currentRoute: { value: { query: {} } },
       push: jest.fn(),
@@ -29,19 +29,19 @@ const createRouterService = ({ currentRouteName }: any) => {
 
 describe('Auth page', () => {
   it('should display login title on login page', () => {
-    routerService = createRouterService({ currentRouteName: RouteName.LOGIN });
+    routerService = createRouterService({ currentRouteName: routeNames.LOGIN });
     const wrapper = createWrapper();
 
-    const expected = RouteName.LOGIN;
+    const expected = 'LOGIN';
 
     expect(wrapper.text()).toContain(expected);
   });
 
   it('should display register title on register page', () => {
-    routerService = createRouterService({ currentRouteName: RouteName.REGISTER });
+    routerService = createRouterService({ currentRouteName: routeNames.REGISTER });
     const wrapper = createWrapper();
 
-    const expected = RouteName.REGISTER;
+    const expected = 'REGISTER';
 
     expect(wrapper.text()).toContain(expected);
   });
@@ -52,7 +52,7 @@ describe('Auth page', () => {
     const credentials = { email, password };
 
     authService = { logIn: jest.fn() };
-    routerService = createRouterService({ currentRouteName: RouteName.LOGIN });
+    routerService = createRouterService({ currentRouteName: routeNames.LOGIN });
     const wrapper = createWrapper();
 
     wrapper.vm.handleFormSubmission(credentials);
@@ -67,7 +67,7 @@ describe('Auth page', () => {
     const credentials = { email, password };
 
     authService = { register: jest.fn() };
-    routerService = createRouterService({ currentRouteName: RouteName.REGISTER });
+    routerService = createRouterService({ currentRouteName: routeNames.REGISTER });
     const wrapper = createWrapper();
 
     wrapper.vm.handleFormSubmission(credentials);

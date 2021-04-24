@@ -1,12 +1,12 @@
 import { Router } from 'vue-router';
 import { RouterService } from '@/application/services/routing/RouterService';
-import { RouteName } from '@/infrastructure/routing/VueRouterFactory';
+import { routeNames } from '@/infrastructure/routing/routeNames';
 
 export class AppRouterService implements RouterService {
   constructor(public router: Router) {}
 
-  get routeName(): any {
-    return RouteName;
+  get routeNames(): any {
+    return routeNames;
   }
 
   get currentRouteName(): string {

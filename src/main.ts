@@ -8,6 +8,7 @@ import axios from 'axios';
 import { createApp } from 'vue';
 import { endpoints } from '@/infrastructure/http/endpoints';
 import { routes } from '@/infrastructure/routing/routes';
+import { startFakeApiServer } from './infrastructure/fixtures/fakeApiServer';
 import store from '@/infrastructure/persistence/VuexStore';
 
 const app = createApp(App);
@@ -38,4 +39,11 @@ declare global {
 // only available during E2E tests
 if (window.Cypress) {
   window.store = store;
+}
+
+// only available on development mode
+const isDevMode = process.env.NODE_ENV === 'development';
+
+if (isDevMode) {
+  startFakeApiServer();
 }

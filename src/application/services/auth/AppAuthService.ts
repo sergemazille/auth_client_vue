@@ -2,7 +2,7 @@ import { AuthService } from '@/application/services/auth/AuthService';
 import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
 import { Store } from 'vuex';
-import { StoreAuth } from '@/infrastructure/persistence/vuexModules/AuthStore';
+import { StoreAuth } from '@/infrastructure/persistence/vuex/modules/Auth';
 
 export class AppAuthService implements AuthService {
   constructor(private readonly store: Store<StoreAuth>, public readonly apiCaller: CallerService) {}

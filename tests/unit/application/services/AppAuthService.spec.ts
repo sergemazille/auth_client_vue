@@ -1,5 +1,5 @@
 import { AppAuthService } from '@/application/services/auth/AppAuthService';
-import store from '@/infrastructure/persistence/VuexStore';
+import store from '@/infrastructure/persistence/vuex/VuexStore';
 import { LocalStorageMock } from '@unit/support/LocalStorageMock';
 
 window.localStorage = new LocalStorageMock();

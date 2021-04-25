@@ -1,4 +1,4 @@
-import store from '@/infrastructure/persistence/VuexStore';
+import store from '@/infrastructure/persistence/vuex/VuexStore';
 
 describe('AuthStore', () => {
   test('that user is not authenticated as a default state', () => {

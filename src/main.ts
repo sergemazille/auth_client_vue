@@ -9,7 +9,7 @@ import { createApp } from 'vue';
 import { endpoints } from '@/infrastructure/http/endpoints';
 import { createAppRoutes } from '@/infrastructure/routing/routes';
 import { startFakeApiServer } from '@fixtures/fakeApiServer';
-import store from '@/infrastructure/persistence/VuexStore';
+import store from '@/infrastructure/persistence/vuex/VuexStore';
 
 const app = createApp(App);
 const baseURL = process.env.VUE_APP_API_BASE_URL;

@@ -1,4 +1,4 @@
-import store from '@/infrastructure/persistence/VuexStore';
+import store from '@/infrastructure/persistence/vuex/VuexStore';
 
 describe('NotificationStore', () => {
   it('should not be any notifications in default state', () => {

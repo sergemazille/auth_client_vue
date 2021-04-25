@@ -1,6 +1,6 @@
 import store from '@/infrastructure/persistence/vuex/VuexStore';
 
-describe('AuthStore', () => {
+describe('Vuex Auth module', () => {
   test('that user is not authenticated as a default state', () => {
     expect(store.getters['auth/isAuthenticated']).toBeFalsy();
   });

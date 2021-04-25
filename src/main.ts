@@ -42,7 +42,7 @@ declare global {
   }
 }
 
-// only available during E2E tests
+// only available during integration tests
 if (window.Cypress) {
   window.store = store;
 }

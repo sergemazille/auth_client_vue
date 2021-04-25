@@ -1,10 +1,10 @@
 import { AuthService } from '@/application/services/auth/AuthService';
 import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
-import { AuthStore } from '@/infrastructure/persistence/AuthStore';
+import { Store } from '@/application/models/Store';
 
 export class AppAuthService implements AuthService {
-  constructor(private readonly store: AuthStore, public readonly apiCaller: CallerService) {}
+  constructor(private readonly store: Store, public readonly apiCaller: CallerService) {}
 
   get isAuthenticated(): boolean {
     const isAuthenticatedInMemory = this.store.get('isAuthenticated');

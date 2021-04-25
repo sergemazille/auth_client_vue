@@ -1,10 +1,17 @@
 import { AuthService } from '@/application/services/auth/AuthService';
 import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
+import { Notification } from '@/application/models/notification/Notification';
+import { NotificationType } from '@/application/models/notification/NotificationType';
+import { NotificationsService } from '../notifications/NotificationsService';
 import { Store } from '@/application/models/Store';
 
 export class AppAuthService implements AuthService {
-  constructor(private readonly store: Store, public readonly apiCaller: CallerService) {}
+  constructor(
+    private readonly store: Store,
+    public readonly apiCaller: CallerService,
+    public readonly notificationsService: NotificationsService
+  ) {}
 
   get isAuthenticated(): boolean {
     const isAuthenticatedInMemory = this.store.get('isAuthenticated');
@@ -21,7 +28,17 @@ export class AppAuthService implements AuthService {
     try {
       await this.validateCredentials(credentials);
     } catch (error) {
-      // do something with error.message
+      let message = 'Une erreur est survenue';
+
+      if (error && error.message) {
+        message = error.message;
+      }
+
+      const type: NotificationType = 'error';
+      const notification = Notification.fromProperties(type, message);
+
+      this.notificationsService.publish(notification);
+
       return;
     }
 

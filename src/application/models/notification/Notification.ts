@@ -2,5 +2,9 @@ import { NotificationMessage } from '@/application/models/notification/Notificat
 import { NotificationType } from '@/application/models/notification/NotificationType';
 
 export class Notification {
-  constructor(public readonly type: NotificationType, public readonly message: NotificationMessage) {}
+  private constructor(public readonly type: NotificationType, public readonly message: NotificationMessage) {}
+
+  static fromProperties(type: NotificationType, message: NotificationMessage): Notification {
+    return new Notification(type, message);
+  }
 }

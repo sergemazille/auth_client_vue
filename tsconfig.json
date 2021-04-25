@@ -15,9 +15,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@unit/*": ["tests/unit/*"],
+      "@fixtures/*": ["./fixtures/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", "fixtures/**/*.ts", "explore/**/*.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,5 @@
 import { createServer } from 'miragejs';
-import { createAuthRoutes } from './fakeApiRoutes/auth';
+import { createAuthRoutes } from '@fixtures/fakeApiRoutes/auth';
 import { AnyFactories, AnyModels, Registry } from 'miragejs/-types';
 import { Server } from 'miragejs/server';
 

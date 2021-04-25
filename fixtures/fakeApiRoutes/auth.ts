@@ -1,4 +1,4 @@
-import { MirageServer } from '@/infrastructure/fixtures/fakeApiServer';
+import { MirageServer } from '@fixtures/fakeApiServer';
 import { Response } from 'miragejs';
 
 export const createAuthRoutes = (server: MirageServer): void => {

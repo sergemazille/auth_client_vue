@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Explore components in isolation
+```
+npm run explore
+```
+
 ### Compiles and minifies for production
 ```
 npm run build

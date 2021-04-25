@@ -1,14 +1,13 @@
 import { AuthService } from '@/application/services/auth/AuthService';
 import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
-import { Store } from 'vuex';
-import { StoreAuth } from '@/infrastructure/persistence/vuex/modules/Auth';
+import { AuthStore } from '@/infrastructure/persistence/AuthStore';
 
 export class AppAuthService implements AuthService {
-  constructor(private readonly store: Store<StoreAuth>, public readonly apiCaller: CallerService) {}
+  constructor(private readonly store: AuthStore, public readonly apiCaller: CallerService) {}
 
   get isAuthenticated(): boolean {
-    const isAuthenticatedInMemory = this.store.getters['auth/isAuthenticated'];
+    const isAuthenticatedInMemory = this.store.get('isAuthenticated');
     const isAuthenticatedLocally = this.isAuthenticatedLocally();
 
     return isAuthenticatedInMemory || isAuthenticatedLocally;
@@ -50,7 +49,7 @@ export class AppAuthService implements AuthService {
   }
 
   private logInMemory() {
-    this.store.dispatch('auth/logIn');
+    this.store.dispatch('logIn');
   }
 
   private logInLocally() {
@@ -59,7 +58,7 @@ export class AppAuthService implements AuthService {
   }
 
   private logOutFromMemory(): void {
-    this.store.dispatch('auth/logOut');
+    this.store.dispatch('logOut');
   }
 
   private logOutLocally(): void {

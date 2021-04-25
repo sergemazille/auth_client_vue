@@ -1,9 +1,9 @@
 import { AppAuthService } from '@/application/services/auth/AppAuthService';
-import store from '@/infrastructure/persistence/vuex/VuexStore';
 import { LocalStorageMock } from '@unit/support/LocalStorageMock';
 
 window.localStorage = new LocalStorageMock();
 let apiCaller: any;
+let authStore: any;
 
 const createApiCaller = (caller?: any, endpoints?: any) => {
   return {
@@ -12,22 +12,34 @@ const createApiCaller = (caller?: any, endpoints?: any) => {
   };
 };
 
+const createAuthStore = (doAuthenticate = false) => {
+  authStore = {
+    get: (param: string) => (param === 'isAuthenticated' ? doAuthenticate : null),
+    dispatch: jest.fn(),
+  };
+};
+
 describe('AppAuthService', () => {
   beforeEach(() => {
     localStorage.clear();
+    createAuthStore();
     apiCaller = createApiCaller();
   });
 
   it('should return correct authentication status when user is authenticated', () => {
-    store.state.auth.isAuthenticated = true;
-    const authService = new AppAuthService(store, apiCaller);
+    const isAuthenticated = true;
+    createAuthStore(isAuthenticated);
+
+    const authService = new AppAuthService(authStore, apiCaller);
 
     expect(authService.isAuthenticated).toBeTruthy();
   });
 
   it('should return correct authentication status when user is not authenticated', () => {
-    store.state.auth.isAuthenticated = false;
-    const authService = new AppAuthService(store, apiCaller);
+    const isAuthenticated = false;
+    createAuthStore(isAuthenticated);
+
+    const authService = new AppAuthService(authStore, apiCaller);
 
     expect(authService.isAuthenticated).toBeFalsy();
   });
@@ -37,8 +49,7 @@ describe('AppAuthService', () => {
 
     const credentials: any = { email: 'user@email.com', password: 'password' };
 
-    store.state.auth.isAuthenticated = false;
-    const authService = new AppAuthService(store, apiCaller);
+    const authService = new AppAuthService(authStore, apiCaller);
 
     await authService.logIn(credentials);
 
@@ -53,8 +64,9 @@ describe('AppAuthService', () => {
 
     const credentials: any = jest.fn();
 
-    store.state.auth.isAuthenticated = true;
-    const authService = new AppAuthService(store, apiCaller);
+    const isAuthenticated = true;
+    createAuthStore(isAuthenticated);
+    const authService = new AppAuthService(authStore, apiCaller);
 
     await authService.logIn(credentials);
 
@@ -66,10 +78,10 @@ describe('AppAuthService', () => {
 
     const credentials: any = jest.fn();
 
-    store.state.auth.isAuthenticated = false;
     const caller = { post: () => Promise.reject() }; // let's pretend backend service rejects credentials
     apiCaller = createApiCaller(caller);
-    const authService = new AppAuthService(store, apiCaller);
+
+    const authService = new AppAuthService(authStore, apiCaller);
 
     await authService.logIn(credentials);
 
@@ -81,8 +93,10 @@ describe('AppAuthService', () => {
 
     const credentials: any = jest.fn();
 
-    store.state.auth.isAuthenticated = false;
-    const authService = new AppAuthService(store, apiCaller);
+    const caller = { post: () => Promise.resolve() }; // let's pretend backend service approves credentials
+    apiCaller = createApiCaller(caller);
+
+    const authService = new AppAuthService(authStore, apiCaller);
 
     await authService.logIn(credentials);
 
@@ -90,26 +104,29 @@ describe('AppAuthService', () => {
     expect(localStorage.getItem('isAuthenticated')).toBeTruthy();
   });
 
-  it('should log user out', () => {
-    store.state.auth.isAuthenticated = true;
-    const authService = new AppAuthService(store, apiCaller);
+  it('should log user out of store', () => {
+    const isAuthenticated = true;
+    createAuthStore(isAuthenticated);
+
+    const authService = new AppAuthService(authStore, apiCaller);
 
     authService.logOut();
 
-    expect(authService.isAuthenticated).toBeFalsy();
-    expect(localStorage.getItem('isAuthenticated')).toBeFalsy();
+    expect(authStore.dispatch).toHaveBeenCalledTimes(1);
+    expect(authStore.dispatch).toHaveBeenCalledWith('logOut');
   });
 
-  it('should register user', async () => {
-    expect.assertions(1);
+  // @todo: update when registration feature is done
+  it('should log user in store after successfull registration', async () => {
+    expect.assertions(2);
 
     const credentials: any = jest.fn();
 
-    store.state.auth.isAuthenticated = false;
-    const authService = new AppAuthService(store, apiCaller);
+    const authService = new AppAuthService(authStore, apiCaller);
 
     await authService.register(credentials);
 
-    expect(authService.isAuthenticated).toBeTruthy();
+    expect(authStore.dispatch).toHaveBeenCalledTimes(1);
+    expect(authStore.dispatch).toHaveBeenCalledWith('logIn');
   });
 });

@@ -10,6 +10,18 @@ export const notifications: Module<any, any> = {
     notifications: [],
   },
 
+  mutations: {
+    addNotification(state, notification: Notification) {
+      state.notifications.push(notification);
+    },
+  },
+
+  actions: {
+    addNotification({ commit }, notification: Notification) {
+      commit('addNotification', notification);
+    },
+  },
+
   getters: {
     notifications: state => state.notifications,
   },

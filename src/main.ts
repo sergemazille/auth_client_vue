@@ -12,6 +12,8 @@ import { createAppRoutes } from '@/infrastructure/routing/routes';
 import { endpoints } from '@/infrastructure/http/endpoints';
 import { startFakeApiServer } from '@fixtures/fakeApiServer';
 import vuexStore from '@/infrastructure/persistence/vuex/VuexStore';
+import { StoreNotifications } from './infrastructure/persistence/vuex/modules/Notifications';
+import { AppNotificationsService } from './application/services/notifications/AppNotificationsService';
 
 const app = createApp(App);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
@@ -19,6 +21,8 @@ const callerInstance = axios.create({ baseURL, withCredentials: true });
 const apiCaller = new AxiosCaller(callerInstance, endpoints);
 const authStore = new StoreUsingVuex<StoreAuth>(vuexStore, 'auth');
 const authService = new AppAuthService(authStore, apiCaller);
+const notificationsStore = new StoreUsingVuex<StoreNotifications>(vuexStore, 'notifications');
+const notificationsService = new AppNotificationsService(notificationsStore);
 const routes = createAppRoutes(authService);
 const { router } = new VueRouterFactory(routes, authService);
 const routerService = new AppRouterService(router);
@@ -30,6 +34,7 @@ if (authService.isAuthenticated) {
 
 app.provide('authService', authService);
 app.provide('routerService', routerService);
+app.provide('notificationsService', notificationsService);
 
 app.use(router);
 

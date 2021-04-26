@@ -26,7 +26,15 @@ export default defineComponent({
   padding: 12px;
 
   &.error {
-    background-color: brown;
+    background-color: crimson;
+  }
+
+  &.success {
+    background-color: green;
+  }
+
+  &.warning {
+    background-color: rgb(230, 134, 9);
   }
 }
 </style>

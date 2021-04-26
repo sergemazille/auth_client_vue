@@ -2,6 +2,7 @@ import { AuthService } from '@/application/services/auth/AuthService';
 import { CallerService } from '@/application/services/http/CallerService';
 import { Credentials } from '@/application/models/Credentials';
 import { Notification } from '@/application/models/notification/Notification';
+import { NotificationMessage } from '@/application/models/notification/NotificationMessage';
 import { NotificationType } from '@/application/models/notification/NotificationType';
 import { NotificationsService } from '../notifications/NotificationsService';
 import { Store } from '@/application/models/Store';
@@ -28,7 +29,7 @@ export class AppAuthService implements AuthService {
     try {
       await this.validateCredentials(credentials);
     } catch (error) {
-      let message = 'Une erreur est survenue';
+      let message: NotificationMessage = 'Une erreur est survenue';
 
       if (error && error.message) {
         message = error.message;

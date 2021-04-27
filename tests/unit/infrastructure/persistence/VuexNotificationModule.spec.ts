@@ -1,4 +1,5 @@
 import store from '@/infrastructure/persistence/vuex/VuexStore';
+import { ERROR_NOTIFICATION } from '@fixtures/notifications';
 
 describe('Vuex Notification module', () => {
   it('should not be any notifications in default state', () => {
@@ -6,9 +7,16 @@ describe('Vuex Notification module', () => {
   });
 
   it('should add a notification', () => {
-    const notification: any = jest.fn();
-    expect(store.dispatch('notifications/addNotification', notification));
+    store.dispatch('notifications/addNotification', ERROR_NOTIFICATION);
 
-    expect(store.getters['notifications/notifications']).toStrictEqual([notification]);
+    expect(store.getters['notifications/notifications']).toStrictEqual([ERROR_NOTIFICATION]);
+  });
+
+  it('should remove a notification', () => {
+    store.state.notifications.notifications = [ERROR_NOTIFICATION];
+
+    store.dispatch('notifications/removeNotification', ERROR_NOTIFICATION);
+
+    expect(store.getters['notifications/notifications']).toStrictEqual([]);
   });
 });

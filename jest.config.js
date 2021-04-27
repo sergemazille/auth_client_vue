@@ -6,5 +6,6 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/tests/unit/support/'],
   moduleNameMapper: {
     '@unit(.*)$': '<rootDir>/tests/unit/$1',
+    '@fixtures(.*)$': '<rootDir>/fixtures/$1',
   },
 };

@@ -17,10 +17,11 @@ import { AppNotificationsService } from './application/services/notifications/Ap
 
 const app = createApp(App);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
+const notificationTimeToLiveInMs = process.env.VUE_APP_NOTIFICATION_TTL_IN_MS;
 const callerInstance = axios.create({ baseURL, withCredentials: true });
 const apiCaller = new AxiosCaller(callerInstance, endpoints);
 const notificationsStore = new StoreUsingVuex<StoreNotifications>(vuexStore, 'notifications');
-const notificationsService = new AppNotificationsService(notificationsStore);
+const notificationsService = new AppNotificationsService(notificationsStore, notificationTimeToLiveInMs);
 const authStore = new StoreUsingVuex<StoreAuth>(vuexStore, 'auth');
 const authService = new AppAuthService(authStore, apiCaller, notificationsService);
 const routes = createAppRoutes(authService);

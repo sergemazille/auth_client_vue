@@ -3,4 +3,5 @@ export const routeNames = {
   LOGIN: 'login',
   REGISTER: 'register',
   DASHBOARD: 'dashboard',
+  ERROR_404: 'error404',
 };

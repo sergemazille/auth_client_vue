@@ -2,6 +2,7 @@ import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vu
 import Auth from '@/infrastructure/ui/pages/Auth.vue';
 import Dashboard from '@/infrastructure/ui/pages/Dashboard.vue';
 import Home from '@/infrastructure/ui/pages/Home.vue';
+import Error404 from '@/infrastructure/ui/pages/Error404.vue';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 import { AuthService } from '@/application/services/AuthService';
 
@@ -34,6 +35,12 @@ export const createAppRoutes = (authService: AuthService): Array<RouteRecordRaw>
       name: routeNames.DASHBOARD,
       component: Dashboard,
       meta: { requiresAuth: true },
+    },
+    {
+      // see https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
+      path: '/:pathMatch(.*)*',
+      name: routeNames.ERROR_404,
+      component: Error404,
     },
   ];
 

@@ -19,4 +19,12 @@ describe('Vuex Notification module', () => {
 
     expect(store.getters['notifications/notifications']).toStrictEqual([]);
   });
+
+  it('should merge duplicated notifications', () => {
+    store.dispatch('notifications/addNotification', ERROR_NOTIFICATION);
+    store.dispatch('notifications/addNotification', ERROR_NOTIFICATION);
+    store.dispatch('notifications/addNotification', ERROR_NOTIFICATION);
+
+    expect(store.getters['notifications/notifications'].length).toBe(1);
+  });
 });

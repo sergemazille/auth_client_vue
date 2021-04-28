@@ -21,7 +21,13 @@ export const notifications: Module<any, any> = {
   },
 
   actions: {
-    addNotification({ commit }, notification: Notification) {
+    addNotification({ commit, state }, notification: Notification) {
+      const doesNotificationAlreadyExist = state.notifications.some((item: Notification) => item.message === notification.message);
+
+      if (doesNotificationAlreadyExist) {
+        return;
+      }
+
       commit('addNotification', notification);
     },
 

@@ -1,24 +1,27 @@
-import NotificationsContainer from '@/infrastructure/ui/components/NotificationsContainer.vue';
+import { ERROR_NOTIFICATION, SUCCESS_NOTIFICATION, WARNING_NOTIFICATION } from '@fixtures/notifications';
 import Notification from '@/infrastructure/ui/components/Notification.vue';
+import NotificationsContainer from '@/infrastructure/ui/components/NotificationsContainer.vue';
 import { shallowMount } from '@vue/test-utils';
+
+let notificationsService: any;
+
+const createWrapper = () => {
+  notificationsService = {
+    get notifications() {
+      return [ERROR_NOTIFICATION, SUCCESS_NOTIFICATION, WARNING_NOTIFICATION];
+    },
+  };
+
+  return shallowMount(NotificationsContainer, {
+    global: {
+      provide: { notificationsService },
+    },
+  });
+};
 
 describe('NotificationsContainer', () => {
   it('should allow multiple notifications at the same time', async () => {
-    const errorNotification: any = { type: 'error', message: 'Error message' };
-    const successNotification: any = { type: 'success', message: 'Success message' };
-    const warningNotification: any = { type: 'warning', message: 'Warning message' };
-    const notifications: any = [errorNotification, successNotification, warningNotification];
-    const notificationsService: any = {
-      get notifications() {
-        return notifications;
-      },
-    };
-
-    const wrapper = shallowMount(NotificationsContainer, {
-      global: {
-        provide: { notificationsService },
-      },
-    });
+    const wrapper = createWrapper();
 
     const componentNotifications = notificationsService.notifications;
 

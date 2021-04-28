@@ -1,8 +1,8 @@
 import { Notification } from '@/application/models/notification/Notification';
-import { NotificationsService } from '@/application/services/notifications/NotificationsService';
+import { NotificationsService } from '@/application/services/NotificationsService';
 import { Store } from '@/application/models/Store';
 
-export class AppNotificationsService implements NotificationsService {
+export class NotificationsUsingStore implements NotificationsService {
   constructor(private readonly store: Store, private readonly notificationTimeToLiveInMs: number) {}
 
   publish(notification: Notification): void {

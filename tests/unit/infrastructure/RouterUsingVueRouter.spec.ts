@@ -1,4 +1,4 @@
-import { AppRouterService } from '@/application/services/routing/AppRouterService';
+import { RouterUsingVueRouter } from '@/infrastructure/routing/RouterUsingVueRouter';
 import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 import { createAppRoutes } from '@/infrastructure/routing/routes';
@@ -15,7 +15,7 @@ describe('AppRouterService', () => {
   });
 
   it('should return actual route name', async () => {
-    const routerService = new AppRouterService(router);
+    const routerService = new RouterUsingVueRouter(router);
 
     await router.push({ name: routeNames.LOGIN });
 
@@ -31,7 +31,7 @@ describe('AppRouterService', () => {
     });
 
     const { router } = new VueRouterFactory(routes, authService);
-    const routerService = new AppRouterService(router);
+    const routerService = new RouterUsingVueRouter(router);
 
     await router.push({ name: 'GUARDED_ROUTE' });
 
@@ -48,7 +48,7 @@ describe('AppRouterService', () => {
     });
 
     const { router } = new VueRouterFactory(routes, authService);
-    const routerService = new AppRouterService(router);
+    const routerService = new RouterUsingVueRouter(router);
 
     await router.push({ name: 'GUARDED_ROUTE' });
 
@@ -60,7 +60,7 @@ describe('AppRouterService', () => {
     routes = createAppRoutes(authService);
 
     const { router } = new VueRouterFactory(routes, authService);
-    const routerService = new AppRouterService(router);
+    const routerService = new RouterUsingVueRouter(router);
 
     await router.push({ name: 'login' });
     await new Promise(resolve => setTimeout(resolve));

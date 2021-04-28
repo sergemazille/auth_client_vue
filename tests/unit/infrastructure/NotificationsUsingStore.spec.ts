@@ -1,4 +1,4 @@
-import { AppNotificationsService } from '@/application/services/notifications/AppNotificationsService';
+import { NotificationsUsingStore } from '@/infrastructure/NotificationsUsingStore';
 
 jest.useFakeTimers();
 
@@ -17,7 +17,7 @@ describe('AppNotificationsService', () => {
 
   it('should call notifications store when a new notification is published', () => {
     // prepare
-    const notificationsService = new AppNotificationsService(notificationStore, notificationTimeToLiveInMs);
+    const notificationsService = new NotificationsUsingStore(notificationStore, notificationTimeToLiveInMs);
 
     // act
     notificationsService.publish(notification);
@@ -32,7 +32,7 @@ describe('AppNotificationsService', () => {
     // prepare
     const notifications: any = [jest.fn()];
     notificationStore = { get: jest.fn(() => notifications) };
-    const notificationsService = new AppNotificationsService(notificationStore, notificationTimeToLiveInMs);
+    const notificationsService = new NotificationsUsingStore(notificationStore, notificationTimeToLiveInMs);
 
     // act
     const storedNotifications = notificationsService.notifications;
@@ -45,7 +45,7 @@ describe('AppNotificationsService', () => {
 
   it('should call store to remove notification after default time to live', () => {
     // prepare
-    const notificationsService = new AppNotificationsService(notificationStore, notificationTimeToLiveInMs);
+    const notificationsService = new NotificationsUsingStore(notificationStore, notificationTimeToLiveInMs);
 
     // act
     notificationsService.publish(notification);

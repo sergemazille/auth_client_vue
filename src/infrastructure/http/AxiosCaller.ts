@@ -1,6 +1,6 @@
-import { CallerInstance } from '@/application/models/CallerInstance';
-import { CallerService } from '@/application/services/http/CallerService';
+import { CallerService } from '@/application/services/CallerService';
+import { AxiosInstance } from 'axios';
 
 export class AxiosCaller implements CallerService {
-  constructor(public readonly caller: CallerInstance, public readonly endpoints: Record<string, string>) {}
+  constructor(public readonly caller: AxiosInstance, public readonly endpoints: Record<string, string>) {}
 }

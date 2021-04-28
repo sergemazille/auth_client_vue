@@ -1,4 +1,4 @@
-import { AppAuthService } from '@/application/services/auth/AppAuthService';
+import { AuthUsingApi } from '@/infrastructure/AuthUsingApi';
 import { LocalStorageMock } from '@unit/support/LocalStorageMock';
 
 window.localStorage = new LocalStorageMock();
@@ -32,7 +32,7 @@ describe('AppAuthService', () => {
     const isAuthenticated = true;
     createAuthStore(isAuthenticated);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     expect(authService.isAuthenticated).toBeTruthy();
   });
@@ -41,7 +41,7 @@ describe('AppAuthService', () => {
     const isAuthenticated = false;
     createAuthStore(isAuthenticated);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     expect(authService.isAuthenticated).toBeFalsy();
   });
@@ -51,7 +51,7 @@ describe('AppAuthService', () => {
 
     const credentials: any = { email: 'user@email.com', password: 'password' };
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -68,7 +68,7 @@ describe('AppAuthService', () => {
 
     const isAuthenticated = true;
     createAuthStore(isAuthenticated);
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -83,7 +83,7 @@ describe('AppAuthService', () => {
     const caller = { post: () => Promise.reject() }; // let's pretend backend service rejects credentials
     apiCaller = createApiCaller(caller);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -99,7 +99,7 @@ describe('AppAuthService', () => {
     const caller = { post: () => Promise.reject({ message: errorMessage }) }; // let's pretend backend service rejects credentials
     apiCaller = createApiCaller(caller);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -115,7 +115,7 @@ describe('AppAuthService', () => {
     const caller = { post: () => Promise.reject('no precision about the error') }; // let's pretend backend service failed for unknown reason
     apiCaller = createApiCaller(caller);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -131,7 +131,7 @@ describe('AppAuthService', () => {
     const caller = { post: () => Promise.resolve() }; // let's pretend backend service approves credentials
     apiCaller = createApiCaller(caller);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.logIn(credentials);
 
@@ -143,7 +143,7 @@ describe('AppAuthService', () => {
     const isAuthenticated = true;
     createAuthStore(isAuthenticated);
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     authService.logOut();
 
@@ -157,7 +157,7 @@ describe('AppAuthService', () => {
 
     const credentials: any = jest.fn();
 
-    const authService = new AppAuthService(authStore, apiCaller, notificationsService);
+    const authService = new AuthUsingApi(authStore, apiCaller, notificationsService);
 
     await authService.register(credentials);
 

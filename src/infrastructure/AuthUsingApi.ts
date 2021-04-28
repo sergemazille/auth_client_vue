@@ -1,17 +1,17 @@
-import { AuthService } from '@/application/services/auth/AuthService';
-import { CallerService } from '@/application/services/http/CallerService';
+import { AuthService } from '@/application/services/AuthService';
+import { AxiosCaller } from '@/infrastructure/http/AxiosCaller';
 import { Credentials } from '@/application/models/Credentials';
 import { Notification } from '@/application/models/notification/Notification';
 import { NotificationMessage } from '@/application/models/notification/NotificationMessage';
 import { NotificationType } from '@/application/models/notification/NotificationType';
-import { NotificationsService } from '../notifications/NotificationsService';
+import { NotificationsUsingStore } from '@/infrastructure/NotificationsUsingStore';
 import { Store } from '@/application/models/Store';
 
-export class AppAuthService implements AuthService {
+export class AuthUsingApi implements AuthService {
   constructor(
     private readonly store: Store,
-    public readonly apiCaller: CallerService,
-    public readonly notificationsService: NotificationsService
+    public readonly apiCaller: AxiosCaller,
+    public readonly notificationsService: NotificationsUsingStore
   ) {}
 
   get isAuthenticated(): boolean {

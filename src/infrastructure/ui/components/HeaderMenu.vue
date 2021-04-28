@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-import { AuthService } from '@/application/services/auth/AuthService';
-import { RouterService } from '@/application/services/routing/RouterService';
+import { AuthService } from '@/application/services/AuthService';
+import { RouterService } from '@/application/services/RouterService';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 import { defineComponent, inject } from 'vue';
 

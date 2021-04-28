@@ -1,5 +1,5 @@
 import { RouteRecordRaw, Router, createRouter, createWebHistory } from 'vue-router';
-import { AuthService } from '@/application/services/auth/AuthService';
+import { AuthService } from '@/application/services/AuthService';
 import { routeNames } from '@/infrastructure/routing/routeNames';
 
 export class VueRouterFactory {

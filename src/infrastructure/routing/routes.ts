@@ -3,7 +3,7 @@ import Auth from '@/infrastructure/ui/pages/Auth.vue';
 import Dashboard from '@/infrastructure/ui/pages/Dashboard.vue';
 import Home from '@/infrastructure/ui/pages/Home.vue';
 import { routeNames } from '@/infrastructure/routing/routeNames';
-import { AuthService } from '@/application/services/auth/AuthService';
+import { AuthService } from '@/application/services/AuthService';
 
 export const createAppRoutes = (authService: AuthService): Array<RouteRecordRaw> => {
   const routes = [

@@ -15,6 +15,15 @@ module.exports = (on, config) => {
   //  watchOptions: {}
   // }))
 
+  // import Vue CLI environment variables into Cypress
+  // original code at https://github.com/vuejs/vue-cli/issues/2447
+  // ex. `VUE_APP_BASE_URL` can be fetched through `Cypress.env('BASE_URL')`
+  Object.entries(process.env)
+    .filter(([key]) => key.startsWith('VUE_APP'))
+    .forEach(([key, value]) => {
+      config.env[key.replace('VUE_APP_', '')] = value;
+    });
+
   return Object.assign({}, config, {
     fixturesFolder: 'tests/integration/fixtures',
     integrationFolder: 'tests/integration/specs',

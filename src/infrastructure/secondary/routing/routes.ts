@@ -1,9 +1,9 @@
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
-import Auth from '@/infrastructure/ui/pages/Auth.vue';
-import Dashboard from '@/infrastructure/ui/pages/Dashboard.vue';
-import Home from '@/infrastructure/ui/pages/Home.vue';
-import Error404 from '@/infrastructure/ui/pages/Error404.vue';
-import { routeNames } from '@/infrastructure/routing/routeNames';
+import Auth from '@/infrastructure/primary/pages/Auth.vue';
+import Dashboard from '@/infrastructure/primary/pages/Dashboard.vue';
+import Home from '@/infrastructure/primary/pages/Home.vue';
+import Error404 from '@/infrastructure/primary/pages/Error404.vue';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
 import { AuthService } from '@/application/services/AuthService';
 
 export const createAppRoutes = (authService: AuthService): Array<RouteRecordRaw> => {

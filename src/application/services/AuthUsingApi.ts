@@ -1,10 +1,10 @@
 import { AuthService } from '@/application/services/AuthService';
-import { AxiosCaller } from '@/infrastructure/http/AxiosCaller';
+import { AxiosCaller } from '@/infrastructure/secondary/http/AxiosCaller';
 import { Credentials } from '@/application/models/Credentials';
 import { Notification } from '@/application/models/notification/Notification';
 import { NotificationMessage } from '@/application/models/notification/NotificationMessage';
 import { NotificationType } from '@/application/models/notification/NotificationType';
-import { NotificationsUsingStore } from '@/infrastructure/NotificationsUsingStore';
+import { NotificationsUsingStore } from '@/application/services/NotificationsUsingStore';
 import { Store } from '@/application/models/Store';
 
 export class AuthUsingApi implements AuthService {

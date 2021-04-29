@@ -1,6 +1,6 @@
 import { RouteRecordRaw, Router, createRouter, createWebHistory } from 'vue-router';
 import { AuthService } from '@/application/services/AuthService';
-import { routeNames } from '@/infrastructure/routing/routeNames';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
 
 export class VueRouterFactory {
   constructor(private readonly routes: Array<RouteRecordRaw>, private readonly authService: AuthService) {}

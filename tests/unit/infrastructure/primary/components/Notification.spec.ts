@@ -1,4 +1,4 @@
-import Notification from '@/infrastructure/ui/components/Notification.vue';
+import Notification from '@/infrastructure/primary/components/Notification.vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe('Notification', () => {

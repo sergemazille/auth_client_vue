@@ -1,4 +1,4 @@
-import store from '@/infrastructure/persistence/vuex/VuexStore';
+import store from '@/infrastructure/secondary/persistence/vuex/VuexStore';
 import { ERROR_NOTIFICATION } from '@fixtures/notifications';
 
 describe('Vuex Notification module', () => {

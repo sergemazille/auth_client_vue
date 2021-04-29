@@ -7,7 +7,7 @@
 <script lang="ts">
 import { NotificationsService } from '@/application/services/NotificationsService';
 import { defineComponent, inject } from 'vue';
-import NotificationComponent from '@/infrastructure/ui/components/Notification.vue';
+import NotificationComponent from '@/infrastructure/primary/components/Notification.vue';
 import { Notification } from '@/application/models/notification/Notification';
 
 export default defineComponent({

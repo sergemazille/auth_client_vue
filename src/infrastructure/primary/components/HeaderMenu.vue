@@ -17,7 +17,7 @@
 <script lang="ts">
 import { AuthService } from '@/application/services/AuthService';
 import { RouterService } from '@/application/services/RouterService';
-import { routeNames } from '@/infrastructure/routing/routeNames';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
 import { defineComponent, inject } from 'vue';
 
 export default defineComponent({

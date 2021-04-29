@@ -3,7 +3,7 @@ const path = require('path');
 
 const isExploreMode = process.env.NODE_ENV === 'explore';
 const exploreModeEntryFilePath = 'explore/main.ts';
-const defaultEntryFilePath = 'src/main.ts';
+const defaultEntryFilePath = 'src/infrastructure/primary/main.ts';
 
 module.exports = {
   pages: {

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Notification from '@/infrastructure/ui/components/Notification.vue';
+import Notification from '@/infrastructure/primary/components/Notification.vue';
 
 export default defineComponent({
   components: {

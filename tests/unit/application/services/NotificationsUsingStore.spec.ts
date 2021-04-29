@@ -1,4 +1,4 @@
-import { NotificationsUsingStore } from '@/infrastructure/NotificationsUsingStore';
+import { NotificationsUsingStore } from '@/application/services/NotificationsUsingStore';
 
 jest.useFakeTimers();
 

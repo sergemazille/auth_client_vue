@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import AuthForm from '@/infrastructure/ui/components/AuthForm.vue';
+import AuthForm from '@/infrastructure/primary/components/AuthForm.vue';
 import { RouterService } from '@/application/services/RouterService';
 import { AuthService } from '@/application/services/AuthService';
 import { Credentials } from '@/application/models/Credentials';

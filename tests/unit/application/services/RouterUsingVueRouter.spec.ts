@@ -1,7 +1,7 @@
-import { RouterUsingVueRouter } from '@/infrastructure/routing/RouterUsingVueRouter';
-import { VueRouterFactory } from '@/infrastructure/routing/VueRouterFactory';
-import { routeNames } from '@/infrastructure/routing/routeNames';
-import { createAppRoutes } from '@/infrastructure/routing/routes';
+import { RouterUsingVueRouter } from '@/infrastructure/secondary/routing/RouterUsingVueRouter';
+import { VueRouterFactory } from '@/infrastructure/secondary/routing/VueRouterFactory';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
+import { createAppRoutes } from '@/infrastructure/secondary/routing/routes';
 
 let routes: any = [];
 let authService: any;

@@ -1,6 +1,6 @@
 import { Router } from 'vue-router';
 import { RouterService } from '@/application/services/RouterService';
-import { routeNames } from '@/infrastructure/routing/routeNames';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
 
 export class RouterUsingVueRouter implements RouterService {
   constructor(public vueRouter: Router) {}

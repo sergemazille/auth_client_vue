@@ -1,6 +1,6 @@
 import { ERROR_NOTIFICATION, SUCCESS_NOTIFICATION, WARNING_NOTIFICATION } from '@fixtures/notifications';
-import Notification from '@/infrastructure/ui/components/Notification.vue';
-import NotificationsContainer from '@/infrastructure/ui/components/NotificationsContainer.vue';
+import Notification from '@/infrastructure/primary/components/Notification.vue';
+import NotificationsContainer from '@/infrastructure/primary/components/NotificationsContainer.vue';
 import { shallowMount } from '@vue/test-utils';
 
 let notificationsService: any;

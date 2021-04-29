@@ -1,5 +1,5 @@
-import Auth from '@/infrastructure/ui/pages/Auth.vue';
-import { routeNames } from '@/infrastructure/routing/routeNames';
+import Auth from '@/infrastructure/primary/pages/Auth.vue';
+import { routeNames } from '@/infrastructure/secondary/routing/routeNames';
 import { shallowMount } from '@vue/test-utils';
 
 let authService: any;

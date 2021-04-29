@@ -1,4 +1,4 @@
-import AuthForm from '@/infrastructure/ui/components/AuthForm.vue';
+import AuthForm from '@/infrastructure/primary/components/AuthForm.vue';
 import { shallowMount } from '@vue/test-utils';
 
 const createWrapper = () => {

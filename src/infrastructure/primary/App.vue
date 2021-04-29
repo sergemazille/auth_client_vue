@@ -6,8 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HeaderMenu from '@/infrastructure/ui/components/HeaderMenu.vue';
-import Notifications from '@/infrastructure/ui/components/NotificationsContainer.vue';
+import HeaderMenu from '@/infrastructure/primary/components/HeaderMenu.vue';
+import Notifications from '@/infrastructure/primary/components/NotificationsContainer.vue';
 
 export default defineComponent({
   components: {

@@ -1,4 +1,4 @@
-import { AuthUsingApi } from '@/infrastructure/AuthUsingApi';
+import { AuthUsingApi } from '@/application/services/AuthUsingApi';
 import { LocalStorageMock } from '@unit/support/LocalStorageMock';
 
 window.localStorage = new LocalStorageMock();

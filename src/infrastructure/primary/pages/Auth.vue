@@ -52,6 +52,10 @@ export default defineComponent({
     },
 
     redirect() {
+      if (!this.authService.isAuthenticated) {
+        return;
+      }
+
       const { router } = this.routerService;
       const currentRoute = router.currentRoute.value;
       const redirectPath = currentRoute.query.redirect as string;

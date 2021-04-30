@@ -5,10 +5,11 @@ import { shallowMount } from '@vue/test-utils';
 let authService: any;
 let routerService: any;
 
-const createAuthService = () => {
+const createAuthService = (isAuthenticated = false) => {
   authService = {
     logIn: jest.fn(),
     register: jest.fn(),
+    isAuthenticated,
   };
 };
 
@@ -62,7 +63,6 @@ describe('Auth page', () => {
 
   it('should call login authentication service when the login form has been submitted', () => {
     const credentials = { email: 'user@email.com', password: 'password' };
-
     createRouterService({ currentRouteName: routeNames.LOGIN });
     const wrapper = createWrapper(authService, routerService);
 
@@ -74,7 +74,6 @@ describe('Auth page', () => {
 
   it('should call register authentication service when the registration form has been submitted', () => {
     const credentials = { email: 'user@email.com', password: 'password' };
-
     createRouterService({ currentRouteName: routeNames.REGISTER });
     const wrapper = createWrapper(authService, routerService);
 
@@ -82,5 +81,26 @@ describe('Auth page', () => {
 
     expect(authService.register).toHaveBeenCalledTimes(1);
     expect(authService.register).toHaveBeenCalledWith(credentials);
+  });
+
+  it('should not allow redirection if user is not authenticated', () => {
+    const isAuthenticated = false;
+    createAuthService(isAuthenticated);
+    const wrapper = createWrapper(authService, routerService);
+
+    wrapper.vm.redirect();
+
+    expect(routerService.router.push).not.toHaveBeenCalled();
+  });
+
+  it('should allow redirection if user is authenticated', () => {
+    const isAuthenticated = true;
+    createAuthService(isAuthenticated);
+    const wrapper = createWrapper(authService, routerService);
+
+    wrapper.vm.redirect();
+
+    expect(routerService.router.push).toHaveBeenCalledTimes(1);
+    expect(routerService.router.push).toHaveBeenCalledWith('/');
   });
 });

@@ -5,7 +5,27 @@ import { shallowMount } from '@vue/test-utils';
 let authService: any;
 let routerService: any;
 
-const createWrapper = () => {
+const createAuthService = () => {
+  authService = {
+    logIn: jest.fn(),
+    register: jest.fn(),
+  };
+};
+
+const createRouterService = (params?: { currentRouteName: string }) => {
+  const currentRouteName = params?.currentRouteName || routeNames.LOGIN;
+
+  routerService = {
+    currentRouteName,
+    routeNames,
+    router: {
+      currentRoute: { value: { query: {} } },
+      push: jest.fn(),
+    },
+  };
+};
+
+const createWrapper = (authService: any, routerService: any) => {
   return shallowMount(Auth, {
     global: {
       provide: {
@@ -16,44 +36,35 @@ const createWrapper = () => {
   });
 };
 
-const createRouterService = ({ currentRouteName }: any) => {
-  return {
-    currentRouteName,
-    routeNames: { LOGIN: routeNames.LOGIN, REGISTER: routeNames.REGISTER },
-    router: {
-      currentRoute: { value: { query: {} } },
-      push: jest.fn(),
-    },
-  };
-};
-
 describe('Auth page', () => {
+  beforeEach(() => {
+    createAuthService();
+    createRouterService();
+  });
+
   it('should display login title on login page', () => {
-    routerService = createRouterService({ currentRouteName: routeNames.LOGIN });
-    const wrapper = createWrapper();
+    createRouterService({ currentRouteName: routeNames.LOGIN });
+    const wrapper = createWrapper(authService, routerService);
 
-    const expected = 'LOGIN';
+    const expectedPageTitle = 'LOGIN';
 
-    expect(wrapper.text()).toContain(expected);
+    expect(wrapper.text()).toContain(expectedPageTitle);
   });
 
   it('should display register title on register page', () => {
-    routerService = createRouterService({ currentRouteName: routeNames.REGISTER });
-    const wrapper = createWrapper();
+    createRouterService({ currentRouteName: routeNames.REGISTER });
+    const wrapper = createWrapper(authService, routerService);
 
-    const expected = 'REGISTER';
+    const expectedPageTitle = 'REGISTER';
 
-    expect(wrapper.text()).toContain(expected);
+    expect(wrapper.text()).toContain(expectedPageTitle);
   });
 
   it('should call login authentication service when the login form has been submitted', () => {
-    const email = 'user@email.com';
-    const password = 'password';
-    const credentials = { email, password };
+    const credentials = { email: 'user@email.com', password: 'password' };
 
-    authService = { logIn: jest.fn() };
-    routerService = createRouterService({ currentRouteName: routeNames.LOGIN });
-    const wrapper = createWrapper();
+    createRouterService({ currentRouteName: routeNames.LOGIN });
+    const wrapper = createWrapper(authService, routerService);
 
     wrapper.vm.handleFormSubmission(credentials);
 
@@ -62,13 +73,10 @@ describe('Auth page', () => {
   });
 
   it('should call register authentication service when the registration form has been submitted', () => {
-    const email = 'user@email.com';
-    const password = 'password';
-    const credentials = { email, password };
+    const credentials = { email: 'user@email.com', password: 'password' };
 
-    authService = { register: jest.fn() };
-    routerService = createRouterService({ currentRouteName: routeNames.REGISTER });
-    const wrapper = createWrapper();
+    createRouterService({ currentRouteName: routeNames.REGISTER });
+    const wrapper = createWrapper(authService, routerService);
 
     wrapper.vm.handleFormSubmission(credentials);
 

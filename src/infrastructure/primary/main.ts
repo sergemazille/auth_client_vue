@@ -36,6 +36,7 @@ if (authService.isAuthenticated) {
 app.provide('authService', authService);
 app.provide('routerService', routerService);
 app.provide('notificationsService', notificationsService);
+app.provide('apiCaller', apiCaller);
 
 app.use(router);
 

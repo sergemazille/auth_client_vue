@@ -4,7 +4,7 @@ import { Credentials } from '@/application/models/Credentials';
 import { Notification } from '@/application/models/notification/Notification';
 import { NotificationMessage } from '@/application/models/notification/NotificationMessage';
 import { NotificationType } from '@/application/models/notification/NotificationType';
-import { NotificationsUsingStore } from '@/application/services/NotificationsUsingStore';
+import { NotificationsUsingStore } from '@/infrastructure/secondary/NotificationsUsingStore';
 import { Store } from '@/application/models/Store';
 
 export class AuthUsingApi implements AuthService {
@@ -27,7 +27,7 @@ export class AuthUsingApi implements AuthService {
     }
 
     try {
-      await this.validateCredentials(credentials);
+      await this.loginViaApi(credentials);
     } catch (error) {
       let message: NotificationMessage = 'Une erreur est survenue';
 
@@ -52,8 +52,26 @@ export class AuthUsingApi implements AuthService {
     this.logOutLocally();
   }
 
-  async register(_credentials: Credentials): Promise<void> {
-    await this.logIn(_credentials);
+  async register(credentials: Credentials): Promise<void> {
+    try {
+      await this.registerViaApi(credentials);
+    } catch (error) {
+      let message: NotificationMessage = 'Une erreur est survenue';
+
+      if (error && error.message) {
+        message = error.message;
+      }
+
+      const type: NotificationType = 'error';
+      const notification = Notification.fromProperties(type, message);
+
+      this.notificationsService.publish(notification);
+
+      return;
+    }
+
+    this.logInMemory();
+    this.logInLocally();
   }
 
   private isAuthenticatedLocally(): boolean {
@@ -83,12 +101,21 @@ export class AuthUsingApi implements AuthService {
     localStorage.removeItem('isAuthenticated');
   }
 
-  private async validateCredentials(credentials: Credentials): Promise<void> {
+  private async loginViaApi(credentials: Credentials): Promise<void> {
     const {
       caller,
       endpoints: { LOGIN },
     } = this.apiCaller;
 
     await caller.post(LOGIN, credentials);
+  }
+
+  private async registerViaApi(credentials: Credentials): Promise<void> {
+    const {
+      caller,
+      endpoints: { REGISTER },
+    } = this.apiCaller;
+
+    await caller.post(REGISTER, credentials);
   }
 }

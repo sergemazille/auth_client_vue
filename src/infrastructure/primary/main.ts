@@ -1,7 +1,7 @@
 import App from '@/infrastructure/primary/App.vue';
-import { AuthUsingApi } from '@/application/services/AuthUsingApi';
+import { AuthUsingApi } from '@/infrastructure/secondary/AuthUsingApi';
 import { AxiosCaller } from '../secondary/http/AxiosCaller';
-import { NotificationsUsingStore } from '@/application/services/NotificationsUsingStore';
+import { NotificationsUsingStore } from '@/infrastructure/secondary/NotificationsUsingStore';
 import { RouterUsingVueRouter } from '@/infrastructure/secondary/routing/RouterUsingVueRouter';
 import { Store } from 'vuex';
 import { StoreAuth } from '../secondary/persistence/vuex/modules/Auth';

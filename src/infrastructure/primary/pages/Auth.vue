@@ -37,7 +37,7 @@ export default defineComponent({
       if (this.currentRouteName === this.routerService.routeNames.LOGIN) {
         await this.logUserIn(credentials);
       } else {
-        this.registerUser(credentials);
+        await this.registerUser(credentials);
       }
 
       this.redirect();
@@ -47,8 +47,8 @@ export default defineComponent({
       await this.authService.logIn(credentials);
     },
 
-    registerUser(credentials: Credentials): void {
-      this.authService.register(credentials);
+    async registerUser(credentials: Credentials): Promise<void> {
+      await this.authService.register(credentials);
     },
 
     redirect() {

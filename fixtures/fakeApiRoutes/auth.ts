@@ -19,4 +19,19 @@ export const createAuthRoutes = (server: MirageServer): void => {
 
     return new Response(200);
   });
+
+  server.post('/register', (_schema, req) => {
+    const requestData = JSON.parse(req.requestBody);
+
+    const inputEmail = requestData.email;
+    const alreadyRegisteredUserEmail = process.env.VUE_APP_API_FIXTURE_AUTH_EMAIL;
+
+    const isAlreadyRegistered = inputEmail === alreadyRegisteredUserEmail;
+
+    if (isAlreadyRegistered) {
+      return new Response(400);
+    }
+
+    return new Response(200);
+  });
 };

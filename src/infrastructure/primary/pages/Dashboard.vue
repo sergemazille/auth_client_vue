@@ -9,6 +9,7 @@ import { CallerService } from '@/application/services/CallerService';
 import { NotificationsService } from '@/application/services/NotificationsService';
 import { defineComponent, inject } from 'vue';
 import { Notification } from '@/application/models/notification/Notification';
+import { NotificationType } from '@/application/models/notification/NotificationType';
 
 export default defineComponent({
   setup() {
@@ -37,10 +38,8 @@ export default defineComponent({
           this.apiMessage = message;
         })
         .catch(error => {
-          const notification: Notification = {
-            type: 'error',
-            message: error.message,
-          };
+          const type = NotificationType.error;
+          const notification = Notification.fromScalar(type, error.message);
 
           this.notificationsService.publish(notification);
         });

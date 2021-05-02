@@ -29,14 +29,14 @@ export class AuthUsingApi implements AuthService {
     try {
       await this.loginViaApi(credentials);
     } catch (error) {
-      let message: NotificationMessage = 'Une erreur est survenue';
+      let message = 'Une erreur est survenue';
 
       if (error && error.message) {
         message = error.message;
       }
 
-      const type: NotificationType = 'error';
-      const notification = Notification.fromProperties(type, message);
+      const type = NotificationType.error;
+      const notification = Notification.fromScalar(type, message);
 
       this.notificationsService.publish(notification);
 
@@ -62,8 +62,8 @@ export class AuthUsingApi implements AuthService {
         message = error.message;
       }
 
-      const type: NotificationType = 'error';
-      const notification = Notification.fromProperties(type, message);
+      const type = NotificationType.error;
+      const notification = Notification.fromScalar(type, message);
 
       this.notificationsService.publish(notification);
 

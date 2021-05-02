@@ -5,6 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Notification from '@/infrastructure/primary/components/Notification.vue';
+import { NotificationType } from '@/application/models/notification/NotificationType';
 
 export default defineComponent({
   components: {
@@ -14,7 +15,7 @@ export default defineComponent({
   data() {
     return {
       defaultProps: {
-        type: 'error',
+        type: NotificationType.error,
         message: 'Une erreur est survenue.',
       },
     };
